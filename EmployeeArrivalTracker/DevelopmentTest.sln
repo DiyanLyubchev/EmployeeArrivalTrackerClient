@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{906A7439-1E4A-4290-8254-5F69BC1AD867}"
+	ProjectSection(SolutionItems) = preProject
+		Data\employees.json = Data\employees.json
+		Data\employees.txt = Data\employees.txt
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonEmployeeGenerator", "JsonEmployeeGenerator\JsonEmployeeGenerator.csproj", "{4F88BA2B-455B-407A-89EC-2A28F2702E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication", "WebApplication\WebApplication.csproj", "{B91A1C09-D11B-45A2-B1CC-3D2C01DC06BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4F88BA2B-455B-407A-89EC-2A28F2702E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F88BA2B-455B-407A-89EC-2A28F2702E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F88BA2B-455B-407A-89EC-2A28F2702E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F88BA2B-455B-407A-89EC-2A28F2702E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B91A1C09-D11B-45A2-B1CC-3D2C01DC06BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B91A1C09-D11B-45A2-B1CC-3D2C01DC06BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B91A1C09-D11B-45A2-B1CC-3D2C01DC06BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B91A1C09-D11B-45A2-B1CC-3D2C01DC06BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6839A34-0C84-4BED-91DD-21C428D25CA2}
+	EndGlobalSection
+EndGlobal
