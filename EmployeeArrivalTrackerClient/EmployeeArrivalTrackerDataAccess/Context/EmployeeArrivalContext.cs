@@ -20,15 +20,16 @@ namespace EmployeeArrivalTrackerDataAccess.Context
 
         public virtual DbSet<RolesNomenclatureTable> RolesNomenclatureTables { get; set; }
 
-        public virtual DbSet<EmployeeTeamsNomenclatureTable>  EmployeeTeamsNomenclatureTables { get; set; }
+        public virtual DbSet<EmployeeTeamsNomenclatureTable> EmployeeTeamsNomenclatureTables { get; set; }
 
-        public virtual DbSet<EmployeesTable>  EmployeesTables   { get; set; }
+        public virtual DbSet<EmployeesTable> EmployeesTables { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedTeamsNomenclature();
             modelBuilder.SeedRolesNomenclature();
-           // modelBuilder.SeedEmployees();
+            modelBuilder.SeedEmployees();
+            modelBuilder.SeedEmployeeTeamsNomenclature();
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -4,6 +4,14 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 {
     public class EmployeeTeamsNomenclatureTable
     {
+        public EmployeeTeamsNomenclatureTable(int id, int employeesTableId,
+            int teamsNomenclatureTableId)
+        {
+            Id = id;
+            EmployeesTableId = employeesTableId;
+            TeamsNomenclatureTableId = teamsNomenclatureTableId;
+        }
+
         [Key]
         public int Id { get; private set; }
 

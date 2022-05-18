@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
@@ -9,14 +8,11 @@ namespace EmployeeArrivalTrackerDataAccess.Data
         {
             Id = id;
             Name = name;
-            EmployeesTables = new();
         }
 
         [Key]
         public int Id { get; private set; }
 
         public string Name { get; set; }
-
-        public List<EmployeesTable> EmployeesTables { get; private set; }
     }
 }
