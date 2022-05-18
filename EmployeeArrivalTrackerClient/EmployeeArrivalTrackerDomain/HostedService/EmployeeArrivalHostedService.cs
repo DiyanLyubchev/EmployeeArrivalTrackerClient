@@ -36,8 +36,14 @@ namespace EmployeeArrivalTrackerDomain.HostedService
                 var clientService = scope.ServiceProvider.GetRequiredService<IClientsService>();
                 var tokenManager = scope.ServiceProvider.GetRequiredService<ITokenManager>();
 
-                string response = await clientService.CallCliensServiceAsync();
-                tokenManager.AddTokenData(response);
+                try
+                {
+                    string response = await clientService.CallCliensServiceAsync();
+                    tokenManager.AddTokenData(response);
+                }
+                catch (Exception)
+                {
+                }
             };
         }
 

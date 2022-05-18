@@ -27,7 +27,6 @@ namespace EmployeeArrivalTrackerDomain.Application
         public List<ArrivalEmployeeVM> GetAllArrivalEmployees()
         {
             DateTime currentDate = Utils.GetCurrentDate();
-
             var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate(currentDate);
 
             if (emplData.Count > 0)

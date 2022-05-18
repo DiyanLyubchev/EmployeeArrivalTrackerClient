@@ -1,18 +1,15 @@
-﻿using EmployeeArrivalTrackerClient.Models;
+﻿using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
+using EmployeeArrivalTrackerDomain.Models.Error;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System.Diagnostics;
 
 namespace EmployeeArrivalTrackerClient.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> logger;
         private readonly IEmployeeArrivalManager manager;
-        public HomeController(ILogger<HomeController> logger, IEmployeeArrivalManager manager)
-        {
-            this.logger = logger;
+        public HomeController(IEmployeeArrivalManager manager)
+        {;
             this.manager = manager;
         }
 
@@ -29,7 +26,8 @@ namespace EmployeeArrivalTrackerClient.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            HttpContext.Session.TryGetValue("Error", out byte[] error);
+            return View(ErrorAdapret.Transform(error));
         }
     }
 }

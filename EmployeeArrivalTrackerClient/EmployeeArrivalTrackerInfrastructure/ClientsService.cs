@@ -21,20 +21,14 @@ namespace EmployeeArrivalTrackerInfrastructure
                 client.DefaultRequestHeaders.Add("Accept-Client", "Fourth-Monitor");
                 client.DefaultRequestHeaders.Accept.Clear();
 
-                try
-                {
-                    var responseMsg = await client.GetAsync(uri);
+                var responseMsg = await client.GetAsync(uri);
 
-                    if (responseMsg.IsSuccessStatusCode)
-                    {
-                        int responseStatusCode = (int)responseMsg.StatusCode;
-                        responseMessage = await responseMsg.Content.ReadAsStringAsync();
-
-                        return responseMessage;
-                    }
-                }
-                catch (Exception)
+                if (responseMsg.IsSuccessStatusCode)
                 {
+                    int responseStatusCode = (int)responseMsg.StatusCode;
+                    responseMessage = await responseMsg.Content.ReadAsStringAsync();
+
+                    return responseMessage;
                 }
 
                 return responseMessage;
