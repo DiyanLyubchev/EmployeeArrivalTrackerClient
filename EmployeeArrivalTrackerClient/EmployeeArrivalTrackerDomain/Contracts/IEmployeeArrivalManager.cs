@@ -7,6 +7,6 @@ namespace EmployeeArrivalTrackerDomain.Contracts
     {
         List<ArrivalEmployeeVM> GetAllArrivalEmployees();
 
-        bool AddArrivalAmployees(object data, string token);
+        void AddArrivalAmployees(object data, string token);
     }
 }

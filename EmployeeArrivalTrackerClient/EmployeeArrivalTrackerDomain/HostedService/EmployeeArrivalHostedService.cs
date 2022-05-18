@@ -24,7 +24,7 @@ namespace EmployeeArrivalTrackerDomain.HostedService
         public Task StartAsync(CancellationToken stoppingToken)
         {
             this.timer = new Timer(CallService, null, TimeSpan.Zero,
-                TimeSpan.FromSeconds(5000));
+                TimeSpan.FromHours(12));
 
             return Task.CompletedTask;
         }

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Common;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
 using EmployeeArrivalTrackerDomain.Models;
 using EmployeeArrivalTrackerDomain.Models.Producer;
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 
@@ -14,16 +16,19 @@ namespace EmployeeArrivalTrackerDomain.Application
     {
         private readonly IMapper mapper;
         private readonly IEmployeeArrivalDbManager dbManager;
-
-        public EmployeeArrivalManager(IMapper mapper, IEmployeeArrivalDbManager dbManager)
+        private readonly ITokenManager tokenManager;
+        public EmployeeArrivalManager(IMapper mapper, IEmployeeArrivalDbManager dbManager, ITokenManager tokenManager)
         {
             this.mapper = mapper;
             this.dbManager = dbManager;
+            this.tokenManager = tokenManager;
         }
 
         public List<ArrivalEmployeeVM> GetAllArrivalEmployees()
         {
-            var emplData = this.dbManager.GetAllArrivalEmployees();
+            DateTime currentDate = Utils.GetCurrentDate();
+
+            var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate(currentDate);
 
             if (emplData.Count > 0)
             {
@@ -33,19 +38,26 @@ namespace EmployeeArrivalTrackerDomain.Application
             return new List<ArrivalEmployeeVM>();
         }
 
-        public bool AddArrivalAmployees(object data, string token)
+        public void AddArrivalAmployees(object data, string token)
         {
             if (data != null)
             {
                 string dataAsString = data.ToString();
-                var request = JsonSerializer.Deserialize<List<Employee>>(dataAsString);
-                List<EmployeeArrivalTable> tables = EmployeeAdapter.Transform(request);
-               
-                this.dbManager.AddArrivalEmployees(tables);
-                return true;
-            }
+                List<Employee> request = JsonSerializer.Deserialize<List<Employee>>(dataAsString);
 
-            return false;
+                bool isTokenValid = this.tokenManager.GetTokenIfExist(token);
+
+                this.AddArrivalEmployeeHelper(request, isTokenValid);
+            }
+        }
+
+        private void AddArrivalEmployeeHelper(List<Employee> request, bool isTokenValid)
+        {
+            if (isTokenValid)
+            {
+                List<EmployeeArrivalTable> tables = EmployeeAdapter.Transform(request);
+                this.dbManager.AddArrivalEmployees(tables);
+            }
         }
     }
 }

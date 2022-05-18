@@ -1,6 +1,7 @@
 ﻿using EmployeeArrivalTrackerDataAccess.Context;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,9 +22,9 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
             this.context.SaveChanges();
         }
 
-        public List<EmployeeArrivalTable> GetAllArrivalEmployees()
+        public List<EmployeeArrivalTable> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate)
         {
-            return this.context.EmployeeArrivalTable.ToList();
+            return this.context.EmployeeArrivalTable.Where(x => x.When.Date == currentDate.Date).ToList();
         }
     }
 }

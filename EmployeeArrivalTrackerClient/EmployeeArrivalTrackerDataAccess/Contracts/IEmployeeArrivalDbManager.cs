@@ -1,4 +1,5 @@
 ﻿using EmployeeArrivalTrackerDataAccess.Data;
+using System;
 using System.Collections.Generic;
 
 namespace EmployeeArrivalTrackerDataAccess.Contracts
@@ -7,6 +8,6 @@ namespace EmployeeArrivalTrackerDataAccess.Contracts
     {
         void AddArrivalEmployees(List<EmployeeArrivalTable> empList);
 
-        List<EmployeeArrivalTable> GetAllArrivalEmployees();
+        List<EmployeeArrivalTable> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate);
     }
 }

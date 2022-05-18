@@ -1,8 +1,10 @@
-﻿using EmployeeArrivalTrackerDataAccess.Contracts;
+﻿using Common;
+using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
 using EmployeeArrivalTrackerDomain.Models.Token;
+using System;
 using System.Text.Json;
 
 namespace EmployeeArrivalTrackerDomain.Application
@@ -18,18 +20,28 @@ namespace EmployeeArrivalTrackerDomain.Application
 
         public void AddTokenData(string tokenData)
         {
-            try
+            if (!string.IsNullOrEmpty(tokenData))
             {
-                if (!string.IsNullOrEmpty(tokenData))
-                {
-                    TokenModel tokenModel = JsonSerializer.Deserialize<TokenModel>(tokenData);
-                    TokenTable table = TokenAdapter.Transform(tokenModel);
-                    this.dbManager.AddToken(table);
-                }
+                TokenModel tokenModel = JsonSerializer.Deserialize<TokenModel>(tokenData);
+                TokenTable table = TokenAdapter.Transform(tokenModel);
+                this.dbManager.AddToken(table);
             }
-            catch (System.Exception)
+        }
+
+        public bool GetTokenIfExist(string token)
+        {
+            var tableToken = this.dbManager.GetToken(token);
+
+            if (tableToken != null)
             {
+                DateTime currentDate = Utils.GetCurrentDate();
+
+                bool isNotExpires = currentDate < tableToken.Expires;
+
+                return isNotExpires;
             }
+
+            return false;
         }
     }
 }
