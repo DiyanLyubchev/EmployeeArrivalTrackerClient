@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using Common;
+using Common.Models.Producer;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
 using EmployeeArrivalTrackerDomain.Models;
-using EmployeeArrivalTrackerDomain.Models.Producer;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -42,7 +42,7 @@ namespace EmployeeArrivalTrackerDomain.Application
             if (data != null)
             {
                 string dataAsString = data.ToString();
-                List<Employee> request = JsonSerializer.Deserialize<List<Employee>>(dataAsString);
+                List<ProducerArrivalEmployeesVM> request = JsonSerializer.Deserialize<List<ProducerArrivalEmployeesVM>>(dataAsString);
 
                 bool isTokenValid = this.tokenManager.GetTokenIfExist(token);
 
@@ -50,7 +50,7 @@ namespace EmployeeArrivalTrackerDomain.Application
             }
         }
 
-        private void AddArrivalEmployeeHelper(List<Employee> request, bool isTokenValid)
+        private void AddArrivalEmployeeHelper(List<ProducerArrivalEmployeesVM> request, bool isTokenValid)
         {
             if (isTokenValid)
             {

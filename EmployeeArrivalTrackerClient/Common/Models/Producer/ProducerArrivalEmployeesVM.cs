@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace EmployeeArrivalTrackerDomain.Models.Producer
+namespace Common.Models.Producer
 {
-    public class Employee
+    public class ProducerArrivalEmployeesVM
     {
         [JsonPropertyName("EmployeeId")]
         public int EmployeeId { get; set; }

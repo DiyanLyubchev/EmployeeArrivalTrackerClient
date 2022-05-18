@@ -1,4 +1,4 @@
-﻿using EmployeeArrivalTrackerDomain.Models.Error;
+﻿using Common.Models.Error;
 using System;
 using System.Text;
 

@@ -1,9 +1,9 @@
 ﻿using Common;
+using Common.Models.Token;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
-using EmployeeArrivalTrackerDomain.Models.Token;
 using System;
 using System.Text.Json;
 

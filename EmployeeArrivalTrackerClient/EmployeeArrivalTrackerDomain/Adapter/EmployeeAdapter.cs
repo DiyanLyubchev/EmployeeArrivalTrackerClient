@@ -1,5 +1,5 @@
-﻿using EmployeeArrivalTrackerDataAccess.Data;
-using EmployeeArrivalTrackerDomain.Models.Producer;
+﻿using Common.Models.Producer;
+using EmployeeArrivalTrackerDataAccess.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,7 +7,7 @@ namespace EmployeeArrivalTrackerDomain.Adapter
 {
     public static class EmployeeAdapter
     {
-        public static List<EmployeeArrivalTable> Transform(List<Employee> request)
+        public static List<EmployeeArrivalTable> Transform(List<ProducerArrivalEmployeesVM> request)
         {
             return request
                 .Select(x =>

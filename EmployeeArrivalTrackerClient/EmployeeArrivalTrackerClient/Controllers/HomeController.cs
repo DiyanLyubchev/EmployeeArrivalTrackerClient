@@ -1,6 +1,5 @@
 ﻿using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
-using EmployeeArrivalTrackerDomain.Models.Error;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeArrivalTrackerClient.Controllers

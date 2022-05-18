@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json.Serialization;
 
-namespace EmployeeArrivalTrackerDomain.Models.Token
+namespace Common.Models.Token
 {
     public class TokenModel
     {

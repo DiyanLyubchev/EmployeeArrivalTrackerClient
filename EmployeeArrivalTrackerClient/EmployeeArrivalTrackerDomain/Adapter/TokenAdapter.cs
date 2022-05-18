@@ -1,5 +1,5 @@
-﻿using EmployeeArrivalTrackerDataAccess.Data;
-using EmployeeArrivalTrackerDomain.Models.Token;
+﻿using Common.Models.Token;
+using EmployeeArrivalTrackerDataAccess.Data;
 
 namespace EmployeeArrivalTrackerDomain.Adapter
 {

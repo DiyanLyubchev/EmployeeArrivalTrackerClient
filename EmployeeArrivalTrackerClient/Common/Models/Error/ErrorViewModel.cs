@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EmployeeArrivalTrackerDomain.Models.Error
+﻿namespace Common.Models.Error
 {
     public class ErrorViewModel
     {
