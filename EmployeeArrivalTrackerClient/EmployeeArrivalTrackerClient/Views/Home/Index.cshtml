@@ -1,0 +1,28 @@
+﻿@model List<ArrivalEmployeeVM>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Fourth bus stop</h1>
+</div>
+<div class="container">
+    <table class="tabble table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>Time Arrivrl</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+              <tr>
+                  <td>@item.EmployeeId</td>
+                  <td>@item.When</td>
+              </tr>
+            }
+        </tbody>
+    </table>
+   
+</div>
