@@ -6,8 +6,8 @@ namespace EmployeeArrivalTrackerDataAccess.Contracts
 {
     public interface IEmployeeArrivalDbManager
     {
-        void AddArrivalEmployees(List<EmployeeArrivalTable> empList);
+        void AddArrivalEmployees(List<EmployeeArrival> empList);
 
-        List<EmployeeArrivalTable> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate);
+        List<EmployeeArrival> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate);
     }
 }

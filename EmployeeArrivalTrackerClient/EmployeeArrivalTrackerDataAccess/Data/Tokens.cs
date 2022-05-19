@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
-    public class TokenTable
+    public class Tokens
     {
-        public TokenTable(string token, DateTime expires)
+        public Tokens(string token, DateTime expires)
         {
             this.Token = token;
             this.Expires = expires;

@@ -5,9 +5,9 @@ namespace EmployeeArrivalTrackerDomain.Adapter
 {
     public static class TokenAdapter
     {
-        public static TokenTable Transform(TokenModel token)
+        public static Tokens Transform(TokenModel token)
         {
-            return new TokenTable(token.Token, token.Expires);
+            return new Tokens(token.Token, token.Expires);
         }
     }
 }

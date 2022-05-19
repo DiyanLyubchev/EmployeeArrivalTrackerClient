@@ -54,7 +54,7 @@ namespace EmployeeArrivalTrackerDomain.Application
         {
             if (isTokenValid)
             {
-                List<EmployeeArrivalTable> tables = EmployeeAdapter.Transform(request);
+                List<EmployeeArrival> tables = EmployeeAdapter.Transform(request);
                 this.dbManager.AddArrivalEmployees(tables);
             }
         }

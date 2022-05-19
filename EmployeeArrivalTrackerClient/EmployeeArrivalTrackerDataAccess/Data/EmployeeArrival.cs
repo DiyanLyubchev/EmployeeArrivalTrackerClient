@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
-    public class EmployeeArrivalTable
+    public class EmployeeArrival
     {
-        public EmployeeArrivalTable(int employeeId, DateTime when)
+        public EmployeeArrival(int employeeId, DateTime when)
         {
             this.EmployeeId = employeeId;
             this.When = when;

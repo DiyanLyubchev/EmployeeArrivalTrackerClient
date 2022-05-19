@@ -4,8 +4,8 @@ namespace EmployeeArrivalTrackerDataAccess.Contracts
 {
     public interface ITokenDbManager
     {
-        void AddToken(TokenTable token);
+        void AddToken(Tokens token);
 
-        TokenTable GetToken(string token);
+        Tokens GetToken(string token);
     }
 }

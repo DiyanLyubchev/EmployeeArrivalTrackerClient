@@ -2,9 +2,9 @@
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
-    public class EmployeeTeamsNomenclatureTable
+    public class EmployeeTeamsNomenclature
     {
-        public EmployeeTeamsNomenclatureTable(int id, int employeesTableId,
+        public EmployeeTeamsNomenclature(int id, int employeesTableId,
             int teamsNomenclatureTableId)
         {
             Id = id;
@@ -17,10 +17,10 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 
         public int EmployeesTableId { get; private set; }
 
-        public EmployeesTable EmployeesTable { get; private set; }
+        public Employee EmployeesTable { get; private set; }
 
         public int TeamsNomenclatureTableId { get; private set; }
 
-        public TeamsNomenclatureTable TeamsNomenclatureTable { get; private set; }
+        public TeamsNomenclature TeamsNomenclatureTable { get; private set; }
     }
 }

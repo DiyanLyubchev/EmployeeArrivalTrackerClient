@@ -12,17 +12,17 @@ namespace EmployeeArrivalTrackerDataAccess.Context
 
         }
 
-        public virtual DbSet<EmployeeArrivalTable> EmployeeArrivalTable { get; set; }
+        public virtual DbSet<EmployeeArrival> EmployeeArrivals { get; set; }
 
-        public virtual DbSet<TokenTable> TokenTables { get; set; }
+        public virtual DbSet<Tokens> Tokens { get; set; }
 
-        public virtual DbSet<TeamsNomenclatureTable> TeamsNomenclatureTables { get; set; }
+        public virtual DbSet<TeamsNomenclature>  Teams { get; set; }
 
-        public virtual DbSet<RolesNomenclatureTable> RolesNomenclatureTables { get; set; }
+        public virtual DbSet<RolesNomenclature>  Roles { get; set; }
 
-        public virtual DbSet<EmployeeTeamsNomenclatureTable> EmployeeTeamsNomenclatureTables { get; set; }
+        public virtual DbSet<EmployeeTeamsNomenclature> EmployeeTeamsNomenclatures { get; set; }
 
-        public virtual DbSet<EmployeesTable> EmployeesTables { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

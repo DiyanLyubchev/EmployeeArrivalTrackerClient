@@ -8,7 +8,7 @@ namespace EmployeeArrivalTrackerDomain.AutoMapperProfiles
     {
         public EmployeeArrivalProfile()
         {
-            CreateMap<ArrivalEmployeeVM, EmployeeArrivalTable>().ReverseMap();
+            CreateMap<ArrivalEmployeeVM, EmployeeArrival>().ReverseMap();
         }
     }
 }

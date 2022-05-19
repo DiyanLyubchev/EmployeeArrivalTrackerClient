@@ -7,11 +7,11 @@ namespace EmployeeArrivalTrackerDomain.Adapter
 {
     public static class EmployeeAdapter
     {
-        public static List<EmployeeArrivalTable> Transform(List<ProducerArrivalEmployeesVM> request)
+        public static List<EmployeeArrival> Transform(List<ProducerArrivalEmployeesVM> request)
         {
             return request
                 .Select(x =>
-                new EmployeeArrivalTable(x.EmployeeId,x.When))
+                new EmployeeArrival(x.EmployeeId,x.When))
                 .ToList();
         }
     }

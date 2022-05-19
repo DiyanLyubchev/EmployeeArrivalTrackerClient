@@ -16,15 +16,15 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
             this.context = context;
         }
 
-        public void AddArrivalEmployees(List<EmployeeArrivalTable> empList)
+        public void AddArrivalEmployees(List<EmployeeArrival> empList)
         {
-            this.context.EmployeeArrivalTable.AddRange(empList);
+            this.context.EmployeeArrivals.AddRange(empList);
             this.context.SaveChanges();
         }
 
-        public List<EmployeeArrivalTable> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate)
+        public List<EmployeeArrival> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate)
         {
-            return this.context.EmployeeArrivalTable.Where(x => x.When.Date == currentDate.Date).ToList();
+            return this.context.EmployeeArrivals.Where(x => x.When.Date == currentDate.Date).ToList();
         }
     }
 }

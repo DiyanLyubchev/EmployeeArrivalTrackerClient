@@ -23,7 +23,7 @@ namespace EmployeeArrivalTrackerDomain.Application
             if (!string.IsNullOrEmpty(tokenData))
             {
                 TokenModel tokenModel = JsonSerializer.Deserialize<TokenModel>(tokenData);
-                TokenTable table = TokenAdapter.Transform(tokenModel);
+                Tokens table = TokenAdapter.Transform(tokenModel);
                 this.dbManager.AddToken(table);
             }
         }

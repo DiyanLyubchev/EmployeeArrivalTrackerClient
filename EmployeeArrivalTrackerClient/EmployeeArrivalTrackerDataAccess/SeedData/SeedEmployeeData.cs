@@ -11,32 +11,33 @@ namespace EmployeeArrivalTrackerDataAccess.SeedData
 {
     public static class SeedEmployeeData
     {
+        private static string employeesJson = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataForSeed/employees.json"));
+
         public static void SeedTeamsNomenclature(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TeamsNomenclatureTable>().HasData(TeamsNomenclature());
+            modelBuilder.Entity<TeamsNomenclature>().HasData(TeamsNomenclature());
         }
 
         public static void SeedRolesNomenclature(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<RolesNomenclatureTable>().HasData(RolesNomenclature());
+            modelBuilder.Entity<RolesNomenclature>().HasData(RolesNomenclature());
         }
 
         public static void SeedEmployees(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EmployeesTable>().HasData(Employees());
+            modelBuilder.Entity<Employee>().HasData(Employees());
         }
 
         public static void SeedEmployeeTeamsNomenclature(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<EmployeeTeamsNomenclatureTable>().HasData(EmployeeTeamsNomenclature());
+            modelBuilder.Entity<EmployeeTeamsNomenclature>().HasData(EmployeeTeamsNomenclature());
         }
 
-        private static List<EmployeeTeamsNomenclatureTable> EmployeeTeamsNomenclature()
+        private static List<EmployeeTeamsNomenclature> EmployeeTeamsNomenclature()
         {
-            List<EmployeeTeamsNomenclatureTable> emploeyeeTeamsTable = new();
-            List<TeamsNomenclatureTable> teams = TeamsNomenclature();
+            List<EmployeeTeamsNomenclature> emploeyeeTeamsTable = new();
+            List<TeamsNomenclature> teams = TeamsNomenclature();
 
-            string employeesJson = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataForSeed/employees.json"));
             List<EmployeesVM> data = JsonSerializer.Deserialize<List<EmployeesVM>>(employeesJson);
             int id = 1;
             foreach (var employee in data.OrderBy(x => x.Id))
@@ -52,18 +53,17 @@ namespace EmployeeArrivalTrackerDataAccess.SeedData
             return emploeyeeTeamsTable;
         }
 
-        private static EmployeeTeamsNomenclatureTable PrepareEmployeesTeamsTable(string teamName, List<TeamsNomenclatureTable> teams, int employeeId, int id)
+        private static EmployeeTeamsNomenclature PrepareEmployeesTeamsTable(string teamName, List<TeamsNomenclature> teams, int employeeId, int id)
         {
             var teamTabel = teams.First(x => x.Name == teamName);
-            return new EmployeeTeamsNomenclatureTable(id, employeeId, teamTabel.Id);
+            return new EmployeeTeamsNomenclature(id, employeeId, teamTabel.Id);
         }
 
-        private static List<EmployeesTable> Employees()
+        private static List<Employee> Employees()
         {
-            List<EmployeesTable> emploeyeesTable = new();
-            List<RolesNomenclatureTable> roles = RolesNomenclature();
+            List<Employee> emploeyeesTable = new();
+            List<RolesNomenclature> roles = RolesNomenclature();
 
-            string employeesJson = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DataForSeed/employees.json"));
             List<EmployeesVM> data = JsonSerializer.Deserialize<List<EmployeesVM>>(employeesJson);
 
             foreach (var item in data.OrderBy(x => x.Id))
@@ -74,7 +74,7 @@ namespace EmployeeArrivalTrackerDataAccess.SeedData
             return emploeyeesTable;
         }
 
-        private static EmployeesTable PrepareEmployeeTable(EmployeesVM vm, List<RolesNomenclatureTable> roles)
+        private static Employee PrepareEmployeeTable(EmployeesVM vm, List<RolesNomenclature> roles)
         {
             int id = vm.Id + 1;
             int roleNomenclatureId = 0;
@@ -84,30 +84,30 @@ namespace EmployeeArrivalTrackerDataAccess.SeedData
                 roleNomenclatureId = role.Id;
             }
 
-            return new EmployeesTable(id, vm.Name, vm.SurName, vm.Age, vm.Email, vm.ManagerId, roleNomenclatureId);
+            return new Employee(id, vm.Name, vm.SurName, vm.Age, vm.Email, vm.ManagerId, roleNomenclatureId);
         }
 
-        private static List<RolesNomenclatureTable> RolesNomenclature()
+        private static List<RolesNomenclature> RolesNomenclature()
         {
-            return new List<RolesNomenclatureTable>
+            return new List<RolesNomenclature>
             {
-                 new RolesNomenclatureTable(1,"Manager"),
-                 new RolesNomenclatureTable(2,"Junior Developer"),
-                 new RolesNomenclatureTable(3,"Semi Senior Developer"),
-                 new RolesNomenclatureTable(4,"Senior Developer"),
-                 new RolesNomenclatureTable(5,"Principal"),
-                 new RolesNomenclatureTable(6,"Team Leader")
+                 new RolesNomenclature(1,"Manager"),
+                 new RolesNomenclature(2,"Junior Developer"),
+                 new RolesNomenclature(3,"Semi Senior Developer"),
+                 new RolesNomenclature(4,"Senior Developer"),
+                 new RolesNomenclature(5,"Principal"),
+                 new RolesNomenclature(6,"Team Leader")
             };
         }
 
-        private static List<TeamsNomenclatureTable> TeamsNomenclature()
+        private static List<TeamsNomenclature> TeamsNomenclature()
         {
-            return new List<TeamsNomenclatureTable>
+            return new List<TeamsNomenclature>
             {
-                 new TeamsNomenclatureTable(1,"Platform"),
-                 new TeamsNomenclatureTable(2,"Sales"),
-                 new TeamsNomenclatureTable(3,"Billing"),
-                 new TeamsNomenclatureTable(4,"Mirage")
+                 new TeamsNomenclature(1,"Platform"),
+                 new TeamsNomenclature(2,"Sales"),
+                 new TeamsNomenclature(3,"Billing"),
+                 new TeamsNomenclature(4,"Mirage")
             };
         }
     }

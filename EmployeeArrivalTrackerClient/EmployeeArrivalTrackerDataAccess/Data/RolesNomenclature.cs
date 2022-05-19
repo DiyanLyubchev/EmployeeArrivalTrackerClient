@@ -2,9 +2,9 @@
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
-    public class TeamsNomenclatureTable
+    public class RolesNomenclature
     {
-        public TeamsNomenclatureTable(int id, string name)
+        public RolesNomenclature(int id, string name)
         {
             Id = id;
             Name = name;

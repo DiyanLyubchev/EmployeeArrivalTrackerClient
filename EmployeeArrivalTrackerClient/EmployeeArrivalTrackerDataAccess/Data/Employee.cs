@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
-    public class EmployeesTable
+    public class Employee
     {
-        public EmployeesTable(int id,
+        public Employee(int id,
                               string name,
                               string surName,
                               int age,
@@ -19,6 +20,7 @@ namespace EmployeeArrivalTrackerDataAccess.Data
             Email = email;
             ManagerId = managerId;
             RolesNomenclatureTableId = rolesNomenclatureTableId;
+            EmployeeTeamsNomenclatures = new List<EmployeeTeamsNomenclature>();
         }
 
         [Key]
@@ -33,8 +35,10 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 
         public int? ManagerId { get; private set; }
 
+        public ICollection<EmployeeTeamsNomenclature>  EmployeeTeamsNomenclatures { get; private set; }
+
         public int RolesNomenclatureTableId { get; private set; }
 
-        public RolesNomenclatureTable Role { get; private set; }
+        public RolesNomenclature Role { get; private set; }
     }
 }

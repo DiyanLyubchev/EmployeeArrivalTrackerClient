@@ -14,15 +14,15 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
             this.context = context;
         }
 
-        public void AddToken(TokenTable token)
+        public void AddToken(Tokens token)
         {
-            this.context.TokenTables.Add(token);
+            this.context.Tokens.Add(token);
             this.context.SaveChanges();
         }
 
-        public TokenTable GetToken(string token)
+        public Tokens GetToken(string token)
         {
-           return this.context.TokenTables.FirstOrDefault(x => x.Token == token);
+           return this.context.Tokens.FirstOrDefault(x => x.Token == token);
         }
     }
 }
