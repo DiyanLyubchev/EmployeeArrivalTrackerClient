@@ -33,7 +33,7 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
                  .Where(x =>
                        x.EmployeeArrival.When.Date == currentDate.Date &&
                        x.RolesNomenclature.Id == x.RolesNomenclatureId &&
-                       //  x.EmployeeTeamsNomenclatures.All(r => r.EmployeesTableId == x.Id) &&
+                      // x.EmployeeTeamsNomenclatures.All(r => r.EmployeeId == x.Id) &&
                        x.EmployeeArrival.EmployeeId == x.Id)
                  .Select(x => new EmployeesVM
                  {
@@ -44,6 +44,7 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
                      Email = x.Email,
                      ManagerId = x.ManagerId,
                      Role = x.RolesNomenclature.Name,
+                    // Teams = x.EmployeeTeamsNomenclatures.Where(x => x.EmployeeId == x.Id).Select(s => s.TeamsNomenclatureId.ToString()).ToHashSet(),
                      When = x.EmployeeArrival.When
                  })
                  .OrderByDescending(x => x.When)

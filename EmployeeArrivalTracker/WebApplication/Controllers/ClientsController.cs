@@ -25,11 +25,7 @@ namespace WebService.Controllers
             if(headerValue != "Fourth-Monitor")
                 return Unauthorized();
 
-            var newClient = new Client()
-            {
-                Url = new Uri(callback),
-                Token = token
-            };
+            var newClient = new Client(callback, token);
 
             new Simulator(newClient, _env.ContentRootPath).Simulate(DateTime.ParseExact(date, "yyyy-MM-dd", CultureInfo.CurrentCulture));
             return Ok(new { newClient.Token, Expires = DateTime.UtcNow.AddHours(8).ToString("u").Replace(" ", "T") });

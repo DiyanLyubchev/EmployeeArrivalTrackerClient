@@ -3,12 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace Common.Models.Token
 {
-    public class TokenModel
-    {
-        [JsonPropertyName("token")]
-        public string Token { get; set; }
-
-        [JsonPropertyName("expires")]
-        public DateTime Expires { get; set; }
-    }
+    public record TokenModel
+        (
+        [property: JsonPropertyName("token")] string Token, 
+        [property: JsonPropertyName("expires")] DateTime Expires
+        );
 }

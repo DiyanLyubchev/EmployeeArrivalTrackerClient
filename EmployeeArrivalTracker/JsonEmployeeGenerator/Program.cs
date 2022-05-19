@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace JsonEmployeeGenerator
 {
@@ -9,11 +10,19 @@ namespace JsonEmployeeGenerator
     {
         static void Main(string[] args)
         {
+            /// <summary>
+            /// Those variables roles and teams would make const and add to nomenclature class
+            /// </summary>
             string[] roles = new string[] { "Junior Developer", "Semi Senior Developer", "Senior Developer", "Principal", "Team Leader" };
             string[] teams = new string[] { "Platform", "Sales", "Billing", "Mirage" };
 
             var generator = new Random();
+
+            /// <summary>
+            /// Here I would exported to ReadFile Service
+            /// </summary>
             var all_lines_in_file = File.ReadAllLines("employees.txt").ToArray();
+
             var employees = new List<JsonEmployee>();
             for (int i = 0; i < all_lines_in_file.Length; i++)
             {
@@ -43,9 +52,16 @@ namespace JsonEmployeeGenerator
 
                 employees.Add(e);
             }
+
+            /// <summary>
+            /// Here I would exported to WriteFile Service and just use JsonSerializer library.
+            ///  The Service will be something like this:
+            ///  string jsonEmployees = JsonSerializer.Serialize(employees);
+            ///  File.WriteAllText(@"D:\employees.json", jsonEmployees);
+            /// </summary>
             var jsonFile = File.CreateText("employees.json");
             jsonFile.WriteLine("[");
-
+      
             for (int i = 0; i < employees.Count; ++i)
             {
                 var jsonEmployee = employees[i];
@@ -70,6 +86,9 @@ namespace JsonEmployeeGenerator
 
     }
 
+    /// <summary>
+    /// This This object would move to project or folder model 
+    /// </summary>
     internal class JsonEmployee
     {
         public string Name { get; set; }

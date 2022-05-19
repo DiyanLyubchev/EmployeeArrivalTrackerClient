@@ -4,7 +4,13 @@ namespace WebApplication.Models
 {
     public class Client
     {
-        public Uri Url { get; set; }
-        public string Token { get; set; }
+        public Client(string callback, string token)
+        {
+            Url = new Uri(callback);
+            Token = token;
+        }
+
+        public Uri Url { get; private set; }
+        public string Token { get; private set; }
     }
 }

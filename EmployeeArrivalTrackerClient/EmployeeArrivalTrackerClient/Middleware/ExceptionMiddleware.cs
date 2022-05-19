@@ -27,9 +27,9 @@ namespace EmployeeArrivalTrackerClient.Middleware
             catch (Exception ex)
             {
                 httpContext.Session.Clear();
-                this.logger.LogError($"Exception {ex.InnerException?.Message } { ex.Message }");
+                this.logger.LogError($"Exception {ex.InnerException?.Message } { ex.Message } {Environment.NewLine} Location: {ex.StackTrace}");
                 string errorMsg = ex.InnerException?.Message ?? ex.Message;
-                httpContext.Session.SetString("Error", $"{errorMsg} Location: {ex.StackTrace}");
+                httpContext.Session.SetString("Error", $"{errorMsg} ");
                 httpContext.Response.Redirect("/home/error");
             }
         }
