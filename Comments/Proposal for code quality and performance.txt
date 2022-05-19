@@ -1,0 +1,11 @@
+
+Into project Json Employee Generator changes, that I can improve are:
+
+1. The variables roles and teams I would make const and add them to nomenclature class
+2. The logic, that read from file employee.txt, I would exported to ReadFile Service
+3. The logic, that write List<JsonEmployee> into employees.json, I would exported to WriteFile Service and use JsonSerializer library.
+   First to serialize object and second use write all text method for create and fill json.
+4. The object JsonEmployee, I  would move to project or folder model. 
+           
+
+ 

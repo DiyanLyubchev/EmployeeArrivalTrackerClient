@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 
 namespace JsonEmployeeGenerator
 {
@@ -57,7 +56,7 @@ namespace JsonEmployeeGenerator
             /// Here I would exported to WriteFile Service and just use JsonSerializer library.
             ///  The Service will be something like this:
             ///  string jsonEmployees = JsonSerializer.Serialize(employees);
-            ///  File.WriteAllText(@"D:\employees.json", jsonEmployees);
+            ///  File.WriteAllText(@"employees.json", jsonEmployees);
             /// </summary>
             var jsonFile = File.CreateText("employees.json");
             jsonFile.WriteLine("[");

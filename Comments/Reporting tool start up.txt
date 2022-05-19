@@ -1,0 +1,8 @@
+Before you start projects, you need to exsecute two commands for seed data.
+Into package manager console changed default project to EmployeeArrivalTrackerDataAccess and run
+   1. Add-Migration Initial
+   2. Update-Database
+
+There are two projects WebApplication and EmployeeArrivalTrackerClient.
+First you must run WebApplication and next EmployeeArrivalTrackerClient, because EmployeeArrivalTrackerClient has hosted service, 
+wich calls WebApplication once on 12 hours after it is started.  
