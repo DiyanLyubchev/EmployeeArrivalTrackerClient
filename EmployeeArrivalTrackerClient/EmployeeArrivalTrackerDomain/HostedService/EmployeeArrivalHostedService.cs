@@ -1,11 +1,8 @@
 ﻿using EmployeeArrivalTrackerDomain.Contracts;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

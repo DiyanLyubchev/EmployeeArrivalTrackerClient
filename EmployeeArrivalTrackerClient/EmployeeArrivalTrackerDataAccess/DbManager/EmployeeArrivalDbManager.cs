@@ -1,4 +1,5 @@
 ﻿using Common.Models.Employees;
+using Common.Pagination;
 using EmployeeArrivalTrackerDataAccess.Context;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
@@ -24,9 +25,9 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
             this.context.SaveChanges();
         }
 
-        public List<EmployeesVM> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate)
+        public PagedResult<EmployeesVM> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate, int p)
         {
-            var dataVm = this.context.Employees
+            PagedResult<EmployeesVM> dataVm =  this.context.Employees
                  .Include(x => x.EmployeeArrival)
                  .Include(x => x.RolesNomenclature)
                  .Include(x => x.EmployeeTeamsNomenclatures)
@@ -46,7 +47,8 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
                      Role = x.RolesNomenclature.Name,
                      When = x.EmployeeArrival.When
                  })
-                 .ToList();
+                 .OrderByDescending(x=> x.When)
+                 .GetPaged(p, 10);
 
             return dataVm;
         }

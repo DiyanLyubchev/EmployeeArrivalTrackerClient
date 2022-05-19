@@ -1,11 +1,11 @@
 ﻿using Common.Models.Employees;
-using System.Collections.Generic;
+using Common.Pagination;
 
 namespace EmployeeArrivalTrackerDomain.Contracts
 {
     public interface IEmployeeArrivalManager
     {
-        List<EmployeesVM> GetAllArrivalEmployees();
+        PagedResult<EmployeesVM> GetAllArrivalEmployees(int p);
 
         void AddArrivalAmployees(object data, string token);
     }

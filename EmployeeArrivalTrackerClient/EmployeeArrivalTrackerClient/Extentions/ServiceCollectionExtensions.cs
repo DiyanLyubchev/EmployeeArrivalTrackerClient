@@ -24,7 +24,7 @@ namespace EmployeeArrivalTrackerClient.Extentions
             services.AddScoped<ITokenManager, TokenManager>();
 
             //Infrastructure
-            services.AddScoped<IClientsService, ClientsService>();
+            services.AddSingleton<IClientsService, ClientsService>();
 
             return services;
         }

@@ -1,4 +1,5 @@
-﻿@model List<EmployeesVM>
+﻿@addTagHelper *, LazZiya.TagHelpers
+@model PagedResult<EmployeesVM>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -7,7 +8,7 @@
     <h1 class="display-4">Welcome To Fourth bus stop</h1>
 </div>
 <div class="container">
-    <table class="tabble table-bordered table-striped table-hover">
+    <table cellpadding="0" cellspacing="0" class="table table-bordered table-condensed">
         <thead>
             <tr>
                 <th>ID</th>
@@ -21,20 +22,26 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Results)
             {
-              <tr>
-                  <td>@item.Id</td>
-                  <td>@item.Name</td>
-                  <td>@item.SurName</td>
-                  <td>@item.Age</td>
-                  <td>@item.Email</td>
-                  <td>@item.Role</td>
-                  <td>@item.ManagerId</td>
-                  <td>@item.When</td>
-              </tr>
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.SurName</td>
+                    <td>@item.Age</td>
+                    <td>@item.Email</td>
+                    <td>@item.Role</td>
+                    <td>@item.ManagerId</td>
+                    <td>@item.When</td>
+                </tr>
             }
         </tbody>
     </table>
-   
+
+
 </div>
+
+<paging page-no="@Model.CurrentPage"
+        page-size="@Model.PageSize"
+        total-records="@(Model.RowCount)">
+</paging>

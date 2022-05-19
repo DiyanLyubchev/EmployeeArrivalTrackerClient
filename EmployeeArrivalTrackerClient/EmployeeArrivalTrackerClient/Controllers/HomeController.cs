@@ -12,9 +12,10 @@ namespace EmployeeArrivalTrackerClient.Controllers
             this.manager = manager;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index(int p = 1)
         {
-            return View(this.manager.GetAllArrivalEmployees());
+            return View(this.manager.GetAllArrivalEmployees(p));
         }
 
         public IActionResult Privacy()
