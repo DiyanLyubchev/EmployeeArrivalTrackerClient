@@ -16,6 +16,8 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 
         public int EmployeeId { get; private set; }
 
+        public Employee Employee { get; private set; }
+
         public DateTime When { get; private set; }
     }
 }

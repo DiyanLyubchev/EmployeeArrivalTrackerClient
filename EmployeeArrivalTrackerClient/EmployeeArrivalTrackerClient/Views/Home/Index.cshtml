@@ -1,4 +1,4 @@
-﻿@model List<ArrivalEmployeeVM>
+﻿@model List<EmployeesVM>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -10,7 +10,13 @@
     <table class="tabble table-bordered table-striped table-hover">
         <thead>
             <tr>
-                <th>Employee ID</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Manager Id</th>
                 <th>Time Arrivrl</th>
             </tr>
         </thead>
@@ -18,7 +24,13 @@
             @foreach (var item in Model)
             {
               <tr>
-                  <td>@item.EmployeeId</td>
+                  <td>@item.Id</td>
+                  <td>@item.Name</td>
+                  <td>@item.SurName</td>
+                  <td>@item.Age</td>
+                  <td>@item.Email</td>
+                  <td>@item.Role</td>
+                  <td>@item.ManagerId</td>
                   <td>@item.When</td>
               </tr>
             }

@@ -1,11 +1,10 @@
-﻿using AutoMapper;
-using Common;
+﻿using Common;
+using Common.Models.Employees;
 using Common.Models.Producer;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
-using EmployeeArrivalTrackerDomain.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -14,27 +13,20 @@ namespace EmployeeArrivalTrackerDomain.Application
 {
     public class EmployeeArrivalManager : IEmployeeArrivalManager
     {
-        private readonly IMapper mapper;
         private readonly IEmployeeArrivalDbManager dbManager;
         private readonly ITokenManager tokenManager;
-        public EmployeeArrivalManager(IMapper mapper, IEmployeeArrivalDbManager dbManager, ITokenManager tokenManager)
+        public EmployeeArrivalManager(IEmployeeArrivalDbManager dbManager, ITokenManager tokenManager)
         {
-            this.mapper = mapper;
             this.dbManager = dbManager;
             this.tokenManager = tokenManager;
         }
 
-        public List<ArrivalEmployeeVM> GetAllArrivalEmployees()
+        public List<EmployeesVM> GetAllArrivalEmployees()
         {
             DateTime currentDate = Utils.GetCurrentDate();
             var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate(currentDate);
 
-            if (emplData.Count > 0)
-            {
-                return this.mapper.Map<List<ArrivalEmployeeVM>>(emplData);
-            }
-
-            return new List<ArrivalEmployeeVM>();
+            return emplData;
         }
 
         public void AddArrivalAmployees(object data, string token)

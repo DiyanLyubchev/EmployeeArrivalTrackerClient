@@ -1,4 +1,3 @@
-using AutoMapper;
 using EmployeeArrivalTrackerClient.Extentions;
 using EmployeeArrivalTrackerDomain.HostedService;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +25,6 @@ namespace EmployeeArrivalTrackerClient
             services.ResolveContext(this.Configuration);
             services.AddControllersWithViews();
             services.AddHostedService<EmployeeArrivalHostedService>();
-            services.AddAutoMapper(typeof(Startup));
 
             services.AddDistributedMemoryCache();
 

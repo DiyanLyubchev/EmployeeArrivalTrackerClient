@@ -11,7 +11,7 @@ namespace EmployeeArrivalTrackerDataAccess.Data
                               int age,
                               string email,
                               int? managerId,
-                              int rolesNomenclatureTableId)
+                              int rolesNomenclatureId)
         {
             Id = id;
             Name = name;
@@ -19,7 +19,7 @@ namespace EmployeeArrivalTrackerDataAccess.Data
             Age = age;
             Email = email;
             ManagerId = managerId;
-            RolesNomenclatureTableId = rolesNomenclatureTableId;
+            RolesNomenclatureId = rolesNomenclatureId;
             EmployeeTeamsNomenclatures = new List<EmployeeTeamsNomenclature>();
         }
 
@@ -37,8 +37,10 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 
         public ICollection<EmployeeTeamsNomenclature>  EmployeeTeamsNomenclatures { get; private set; }
 
-        public int RolesNomenclatureTableId { get; private set; }
+        public int RolesNomenclatureId { get; private set; }
 
-        public RolesNomenclature Role { get; private set; }
+        public RolesNomenclature RolesNomenclature { get; private set; }
+
+        public EmployeeArrival EmployeeArrival { get; private set; }
     }
 }
