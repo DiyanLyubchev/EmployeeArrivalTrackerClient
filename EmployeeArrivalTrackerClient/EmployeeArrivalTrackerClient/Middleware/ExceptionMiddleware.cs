@@ -29,7 +29,7 @@ namespace EmployeeArrivalTrackerClient.Middleware
                 httpContext.Session.Clear();
                 this.logger.LogError($"Exception {ex.InnerException?.Message } { ex.Message }");
                 string errorMsg = ex.InnerException?.Message ?? ex.Message;
-                httpContext.Session.SetString("Error", errorMsg);
+                httpContext.Session.SetString("Error", $"{errorMsg} Location: {ex.StackTrace}");
                 httpContext.Response.Redirect("/home/error");
             }
         }

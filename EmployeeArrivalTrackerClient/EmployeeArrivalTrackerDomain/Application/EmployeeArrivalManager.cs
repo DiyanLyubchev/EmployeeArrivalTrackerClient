@@ -1,7 +1,6 @@
 ﻿using Common;
 using Common.Models.Employees;
 using Common.Models.Producer;
-using Common.Pagination;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
@@ -22,10 +21,10 @@ namespace EmployeeArrivalTrackerDomain.Application
             this.tokenManager = tokenManager;
         }
 
-        public PagedResult<EmployeesVM> GetAllArrivalEmployees(int p)
+        public List<EmployeesVM> GetAllArrivalEmployees()
         {
             DateTime currentDate = Utils.GetCurrentDate();
-            var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate(currentDate, p);
+            var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate(currentDate);
 
             return emplData;
         }

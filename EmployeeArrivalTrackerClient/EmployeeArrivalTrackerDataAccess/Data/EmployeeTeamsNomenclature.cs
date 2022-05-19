@@ -4,23 +4,23 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 {
     public class EmployeeTeamsNomenclature
     {
-        public EmployeeTeamsNomenclature(int id, int employeesTableId,
-            int teamsNomenclatureTableId)
+        public EmployeeTeamsNomenclature(int id, int employeeId,
+            int teamsNomenclatureId)
         {
             Id = id;
-            EmployeesTableId = employeesTableId;
-            TeamsNomenclatureTableId = teamsNomenclatureTableId;
+            EmployeeId = employeeId;
+            TeamsNomenclatureId = teamsNomenclatureId;
         }
 
         [Key]
         public int Id { get; private set; }
 
-        public int EmployeesTableId { get; private set; }
+        public int EmployeeId { get; private set; }
 
-        public Employee EmployeesTable { get; private set; }
+        public virtual Employee Employee { get; private set; }
 
-        public int TeamsNomenclatureTableId { get; private set; }
+        public int TeamsNomenclatureId { get; private set; }
 
-        public TeamsNomenclature TeamsNomenclatureTable { get; private set; }
+        public virtual TeamsNomenclature TeamsNomenclature { get; private set; }
     }
 }

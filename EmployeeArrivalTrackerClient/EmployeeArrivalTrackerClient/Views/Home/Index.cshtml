@@ -1,47 +1,36 @@
-﻿@addTagHelper *, LazZiya.TagHelpers
-@model PagedResult<EmployeesVM>
+﻿@model List<EmployeesVM>
 @{
     ViewData["Title"] = "Home Page";
+    bool isAnyRecords = Model.Any();
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome To Fourth bus stop</h1>
 </div>
-<div class="container">
-    <table cellpadding="0" cellspacing="0" class="table table-bordered table-condensed">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Age</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Manager Id</th>
-                <th>Time Arrivrl</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Results)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>@item.SurName</td>
-                    <td>@item.Age</td>
-                    <td>@item.Email</td>
-                    <td>@item.Role</td>
-                    <td>@item.ManagerId</td>
-                    <td>@item.When</td>
-                </tr>
-            }
-        </tbody>
-    </table>
 
 
-</div>
+    @(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.Id).Titled("ID");
+            columns.Add(model => model.Name).Titled("Name");
+            columns.Add(model => model.SurName).Titled("Surname");
+            columns.Add(model => model.Age).Titled("Age");
+            columns.Add(model => model.Email).Titled("Email");
+            columns.Add(model => model.Role).Titled("Role");
+            columns.Add(model => model.ManagerId).Titled("Manager Id");
+            columns.Add(model => model.When).Titled("When Arrivel");
+        })
+        .UsingFilterMode(GridFilterMode.Header)
+        .AppendCss("table-hover")
+        .Empty("No data found")
+        .Filterable()
+        .Sortable()
+        .Pageable(pager =>
+        {
+        pager.RowsPerPage = 20;
+        })
+        )
 
-<paging page-no="@Model.CurrentPage"
-        page-size="@Model.PageSize"
-        total-records="@(Model.RowCount)">
-</paging>
+

@@ -17,9 +17,7 @@ namespace EmployeeArrivalTrackerInfrastructure
                 string url = new($"http://localhost:51397/api/clients/subscribe?date={date}&callback=https://localhost:5001/api/employeearrivalproducer/produce");
                 Uri uri = new(url);
 
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Add("Accept-Client", "Fourth-Monitor");
-                client.DefaultRequestHeaders.Accept.Clear();
 
                 var responseMsg = await client.GetAsync(uri);
 

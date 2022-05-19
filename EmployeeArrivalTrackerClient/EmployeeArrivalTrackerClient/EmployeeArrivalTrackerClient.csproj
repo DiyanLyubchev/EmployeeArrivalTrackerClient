@@ -10,6 +10,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="NonFactors.Grid.Mvc6" Version="5.1.2" />
 	</ItemGroup>
 
   <ItemGroup>

@@ -13,9 +13,9 @@ namespace EmployeeArrivalTrackerClient.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int p = 1)
+        public IActionResult Index()
         {
-            return View(this.manager.GetAllArrivalEmployees(p));
+            return View(this.manager.GetAllArrivalEmployees());
         }
 
         public IActionResult Privacy()

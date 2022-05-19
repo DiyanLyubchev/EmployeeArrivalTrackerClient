@@ -9,7 +9,7 @@ namespace Common.Models.Employees
 
         public int? ManagerId { get; set; }
 
-        public int Age { get; set; }
+        public int? Age { get; set; }
 
         public HashSet<string> Teams { get; set; }
 

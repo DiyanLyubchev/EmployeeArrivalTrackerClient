@@ -8,10 +8,10 @@ namespace EmployeeArrivalTrackerDataAccess.Data
         public Employee(int id,
                               string name,
                               string surName,
-                              int age,
+                              int? age,
                               string email,
                               int? managerId,
-                              int rolesNomenclatureId)
+                              int? rolesNomenclatureId)
         {
             Id = id;
             Name = name;
@@ -29,18 +29,18 @@ namespace EmployeeArrivalTrackerDataAccess.Data
         public string Name { get; private set; }
 
         public string SurName { get; private set; }
-        public int Age { get; private set; }
+        public int? Age { get; private set; }
 
         public string Email { get; private set; }
 
         public int? ManagerId { get; private set; }
 
-        public ICollection<EmployeeTeamsNomenclature>  EmployeeTeamsNomenclatures { get; private set; }
+        public virtual ICollection<EmployeeTeamsNomenclature>  EmployeeTeamsNomenclatures { get; private set; }
 
-        public int RolesNomenclatureId { get; private set; }
+        public int? RolesNomenclatureId { get; private set; }
 
-        public RolesNomenclature RolesNomenclature { get; private set; }
+        public virtual RolesNomenclature RolesNomenclature { get; private set; }
 
-        public EmployeeArrival EmployeeArrival { get; private set; }
+        public virtual EmployeeArrival EmployeeArrival { get; private set; }
     }
 }
