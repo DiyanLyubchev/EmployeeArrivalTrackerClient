@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeArrivalTrackerInfra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeArrivalTrackerDataAccess", "EmployeeArrivalTrackerDataAccess\EmployeeArrivalTrackerDataAccess.csproj", "{FC925BBA-5D4B-4C2E-AA9C-9892CB2FC271}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{8F6C7357-F25F-4B3B-ADA0-FE29F8C63AFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{8F6C7357-F25F-4B3B-ADA0-FE29F8C63AFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeArrivalTrackerTest", "EmployeeArrivalTrackerTest\EmployeeArrivalTrackerTest.csproj", "{0C656359-B669-4BDB-9268-96003D1031F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8F6C7357-F25F-4B3B-ADA0-FE29F8C63AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F6C7357-F25F-4B3B-ADA0-FE29F8C63AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F6C7357-F25F-4B3B-ADA0-FE29F8C63AFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C656359-B669-4BDB-9268-96003D1031F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C656359-B669-4BDB-9268-96003D1031F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C656359-B669-4BDB-9268-96003D1031F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C656359-B669-4BDB-9268-96003D1031F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

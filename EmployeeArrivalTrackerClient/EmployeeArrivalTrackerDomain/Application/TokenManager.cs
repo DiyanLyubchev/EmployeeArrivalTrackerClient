@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Exceptions;
 using Common.Models.Token;
 using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.Data;
@@ -18,14 +19,24 @@ namespace EmployeeArrivalTrackerDomain.Application
             this.dbManager = dbManager;
         }
 
-        public void AddTokenData(string tokenData)
+        public bool AddTokenData(string tokenData)
         {
             if (!string.IsNullOrEmpty(tokenData))
             {
                 TokenModel tokenModel = JsonSerializer.Deserialize<TokenModel>(tokenData);
+
+                if (string.IsNullOrEmpty(tokenModel.Token))
+                {
+                    throw new TokenException("Token can not be null");
+                }
+
                 Tokens table = TokenAdapter.Transform(tokenModel);
                 this.dbManager.AddToken(table);
+
+                return true;
             }
+
+            return false;
         }
 
         public bool GetTokenIfExist(string token)

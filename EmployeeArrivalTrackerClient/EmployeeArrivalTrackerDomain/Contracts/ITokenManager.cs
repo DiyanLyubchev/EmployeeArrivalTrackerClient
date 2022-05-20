@@ -2,7 +2,7 @@
 {
     public interface ITokenManager
     {
-        void AddTokenData(string tokenData);
+        bool AddTokenData(string tokenData);
 
         bool GetTokenIfExist(string token);
     }
