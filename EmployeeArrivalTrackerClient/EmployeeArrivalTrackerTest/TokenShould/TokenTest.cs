@@ -20,13 +20,13 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         {
             var tokenData = TokensGenerator.GenerateTokenTable();
 
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<ITokenDbManager>();
 
-            mockDbMAnager
+            mockDbManager
                 .Setup(x => x.GetToken(token))
                 .Returns(tokenData);
 
-            var manager = new TokenManager(mockDbMAnager.Object);
+            var manager = new TokenManager(mockDbManager.Object);
 
             bool sut = manager.GetTokenIfExist(token);
             Assert.IsTrue(sut);
@@ -37,13 +37,13 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         {
             string notValidToken = $"{token}-23dss";
             var tokenData = TokensGenerator.GenerateTokenTable();
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<ITokenDbManager>();
 
-            mockDbMAnager
+            mockDbManager
                 .Setup(x => x.GetToken(token))
                 .Returns(tokenData);
 
-            var manager = new TokenManager(mockDbMAnager.Object);
+            var manager = new TokenManager(mockDbManager.Object);
             
             bool sut = manager.GetTokenIfExist(notValidToken);
             Assert.IsFalse(sut);
@@ -52,10 +52,10 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void AddTokenDataValid_Test()
         {
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<ITokenDbManager>();
             string token = TokensGenerator.GenerateTokenModel();
 
-            var manager = new TokenManager(mockDbMAnager.Object);
+            var manager = new TokenManager(mockDbManager.Object);
 
             bool sut = manager.AddTokenData(token);
             Assert.IsTrue(sut);
@@ -64,9 +64,9 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void AddTokenDataNotValid_Test()
         {
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<ITokenDbManager>();
 
-            var manager = new TokenManager(mockDbMAnager.Object);
+            var manager = new TokenManager(mockDbManager.Object);
 
             bool sut = manager.AddTokenData(null);
             Assert.IsFalse(sut);
@@ -76,10 +76,10 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [ExpectedException(typeof(TokenException))]
         public void ThrowException_IfTokenIsNull_Test()
         {
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbMngr = new Mock<ITokenDbManager>();
             string token = TokensGenerator.GenerateTokenModelWithNullToken();
 
-            var sut = new TokenManager(mockDbMAnager.Object);
+            var sut = new TokenManager(mockDbMngr.Object);
 
             sut.AddTokenData(token);
         }
@@ -87,7 +87,7 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void AddTokenDB_Test()
         {
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbMngr = new Mock<ITokenDbManager>();
             var token = TokensGenerator.GenerateTokenTable();
 
             var options = TestUtilities.GetOptions(nameof(AddTokenDB_Test));
@@ -107,7 +107,7 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         public void GetTokenDB_Test()
         {
 
-            var mockDbMAnager = new Mock<ITokenDbManager>();
+            var mockDbMngr = new Mock<ITokenDbManager>();
             var tokenData = TokensGenerator.GenerateTokenTable();
 
             var options = TestUtilities.GetOptions(nameof(GetTokenDB_Test));
