@@ -11,7 +11,7 @@ using System.Linq;
 namespace EmployeeArrivalTrackerTest.TokenShould
 {
     [TestClass]
-    public class TokenTests
+    public class TokenTest
     {
         private const string token = "f16149b14cba46be92da20743b97a2f2";
 
