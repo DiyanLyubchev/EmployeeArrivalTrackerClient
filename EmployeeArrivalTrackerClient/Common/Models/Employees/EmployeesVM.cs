@@ -23,6 +23,6 @@ namespace Common.Models.Employees
 
         public string Name { get; set; }
 
-        public DateTime When { get; set; }
+        public DateTime WhenArrival { get; set; }
     }
 }

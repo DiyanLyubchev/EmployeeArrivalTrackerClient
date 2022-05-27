@@ -30,7 +30,7 @@ namespace EmployeeArrivalTrackerDomain.Adapter
                     Role = x.RoleName,
                     SurName = x.SurName,
                     TeamDescription = x.TeamName,
-                    When = x.WhenArrival
+                    WhenArrival = x.WhenArrival
                 })
                 .ToList();
         }

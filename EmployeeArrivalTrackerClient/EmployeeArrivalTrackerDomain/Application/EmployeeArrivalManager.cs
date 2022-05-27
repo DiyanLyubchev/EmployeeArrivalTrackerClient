@@ -22,10 +22,11 @@ namespace EmployeeArrivalTrackerDomain.Application
 
         public List<EmployeesVM> GetAllArrivalEmployees()
         {
-            var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate();
+            //var emplData = this.dbManager.GetAllArrivalEmployeesByQuery(); //too slowly
+            //return EmployeeAdapter.Transform(emplData);
 
-            return EmployeeAdapter.Transform(emplData);
-           // return emplData;
+            var emplData = this.dbManager.GetAllArrivalEmployeesByEF();
+            return emplData;
         }
 
         public bool AddArrivalEmployees(List<ProducerArrivalEmployeesVM> data, string token)
