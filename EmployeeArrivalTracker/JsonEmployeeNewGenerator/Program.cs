@@ -1,4 +1,6 @@
-﻿using JsonEmployeeNewGenerator.Services;
+﻿using JsonEmployeeNewGenerator.Models;
+using JsonEmployeeNewGenerator.Services;
+using System.Collections.Generic;
 
 namespace JsonEmployeeGenerator
 {
@@ -6,7 +8,8 @@ namespace JsonEmployeeGenerator
     {
         static void Main(string[] args)
         {
-            var employees = ReadFileService.ReadFile();
+            List<JsonEmployee> employees = ReadFileService.ReadFile();
+
             WriteFileService.WriteFile(employees);
         }
     }

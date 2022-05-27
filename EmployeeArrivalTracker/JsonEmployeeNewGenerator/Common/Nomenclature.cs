@@ -3,13 +3,13 @@
     public static class Nomenclature
     {
         public static string[] roles = 
-            new string[] 
+            new[] 
             {
                 "Junior Developer", "Semi Senior Developer", "Senior Developer", "Principal", "Team Leader" 
             };
 
         public static string[] teams = 
-            new string[] 
+            new[] 
             {
                 "Platform", "Sales", "Billing", "Mirage" 
             };

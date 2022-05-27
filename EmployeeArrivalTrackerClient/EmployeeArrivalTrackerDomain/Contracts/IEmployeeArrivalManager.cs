@@ -1,4 +1,5 @@
 ﻿using Common.Models.Employees;
+using Common.Models.Producer;
 using System.Collections.Generic;
 
 namespace EmployeeArrivalTrackerDomain.Contracts
@@ -7,6 +8,6 @@ namespace EmployeeArrivalTrackerDomain.Contracts
     {
         List<EmployeesVM> GetAllArrivalEmployees();
 
-        void AddArrivalAmployees(object data, string token);
+        bool AddArrivalEmployees(List<ProducerArrivalEmployeesVM> data, string token);
     }
 }

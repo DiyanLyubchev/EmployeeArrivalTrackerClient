@@ -13,10 +13,11 @@ namespace JsonEmployeeNewGenerator.Services
 
         public static void WriteFile(List<JsonEmployee> employees)
         {
-            var options = new JsonSerializerOptions(_options)
+            JsonSerializerOptions options = new(_options)
             {
                 WriteIndented = true
             };
+
             string jsonEmployees = JsonSerializer.Serialize(employees, options);
             File.WriteAllText(@$"newEmployees.json", jsonEmployees);
         }

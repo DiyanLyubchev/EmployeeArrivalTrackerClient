@@ -1,5 +1,6 @@
 ﻿using Common.Models.Employees;
 using EmployeeArrivalTrackerDataAccess.Data;
+using EmployeeArrivalTrackerDataAccess.SeedData.Nomen;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -89,26 +90,25 @@ namespace EmployeeArrivalTrackerDataAccess.SeedData
 
         private static List<RolesNomenclature> RolesNomenclature()
         {
-            return new List<RolesNomenclature>
+            List<RolesNomenclature> roles = new();
+
+            for (int i = 0; i < Nomenclature.roles.Length; i++)
             {
-                 new RolesNomenclature(1,"Manager"),
-                 new RolesNomenclature(2,"Junior Developer"),
-                 new RolesNomenclature(3,"Semi Senior Developer"),
-                 new RolesNomenclature(4,"Senior Developer"),
-                 new RolesNomenclature(5,"Principal"),
-                 new RolesNomenclature(6,"Team Leader")
-            };
+                roles.Add(new RolesNomenclature(i + 1, Nomenclature.roles[i]));
+            }
+
+            return roles;
         }
 
         private static List<TeamsNomenclature> TeamsNomenclature()
         {
-            return new List<TeamsNomenclature>
+            List<TeamsNomenclature> teams = new();
+            for (int i = 0; i < Nomenclature.teams.Length; i++)
             {
-                 new TeamsNomenclature(1,"Platform"),
-                 new TeamsNomenclature(2,"Sales"),
-                 new TeamsNomenclature(3,"Billing"),
-                 new TeamsNomenclature(4,"Mirage")
-            };
+                teams.Add(new Data.TeamsNomenclature(i + 1, Nomenclature.teams[i]));
+            }
+
+            return teams;
         }
     }
 }

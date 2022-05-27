@@ -7,7 +7,6 @@ using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 
 namespace EmployeeArrivalTrackerDomain.Application
 {
@@ -29,26 +28,19 @@ namespace EmployeeArrivalTrackerDomain.Application
             return emplData;
         }
 
-        public void AddArrivalAmployees(object data, string token)
+        public bool AddArrivalEmployees(List<ProducerArrivalEmployeesVM> data, string token)
         {
-            if (data != null)
+            bool isTokenValid = this.tokenManager.GetTokenIfExist(token);
+
+            if (data.Count != 0 && isTokenValid)
             {
-                string dataAsString = data.ToString();
-                List<ProducerArrivalEmployeesVM> request = JsonSerializer.Deserialize<List<ProducerArrivalEmployeesVM>>(dataAsString);
-
-                bool isTokenValid = this.tokenManager.GetTokenIfExist(token);
-
-                this.AddArrivalEmployeeHelper(request, isTokenValid);
-            }
-        }
-
-        private void AddArrivalEmployeeHelper(List<ProducerArrivalEmployeesVM> request, bool isTokenValid)
-        {
-            if (isTokenValid)
-            {
-                List<EmployeeArrival> tables = EmployeeAdapter.Transform(request);
+                List<EmployeeArrival> tables = EmployeeAdapter.Transform(data);
                 this.dbManager.AddArrivalEmployees(tables);
+
+                return true;
             }
+
+            return false;
         }
     }
 }

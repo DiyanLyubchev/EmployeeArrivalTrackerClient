@@ -7,41 +7,41 @@ using System.Linq;
 
 namespace JsonEmployeeNewGenerator.Services
 {
-    public static class  ReadFileService
+    public static class ReadFileService
     {
         public static List<JsonEmployee> ReadFile()
         {
-            var generator = new Random();
+            Random generator = new();
             var allLinesInFile = File.ReadAllLines("employees.txt").ToArray();
 
-            var employees = new List<JsonEmployee>();
+            List<JsonEmployee> employees = new();
             for (int i = 0; i < allLinesInFile.Length; i++)
             {
-                JsonEmployee e = new JsonEmployee();
-                e.Id = i;
-                e.Name = allLinesInFile[i].Split('\t')[0];
-                e.SurName = allLinesInFile[i].Split('\t')[1];
-                e.Email = allLinesInFile[i].Split('\t')[2];
-                e.Age = generator.Next(18, 66);
+                JsonEmployee employee = new();
+                employee.Id = i;
+                employee.Name = allLinesInFile[i].Split('\t')[0];
+                employee.SurName = allLinesInFile[i].Split('\t')[1];
+                employee.Email = allLinesInFile[i].Split('\t')[2];
+                employee.Age = generator.Next(18, 66);
                 if (i < 11)
                 {
-                    e.Role = "Manager";
-                    e.Teams = new HashSet<string>();
+                    employee.Role = "Manager";
+                    employee.Teams = new HashSet<string>();
                 }
                 else
                 {
-                    e.ManagerId = generator.Next(11);
-                    e.Role = Nomenclature.roles[generator.Next(4)];
+                    employee.ManagerId = generator.Next(11);
+                    employee.Role = Nomenclature.roles[generator.Next(4)];
                     int count = generator.Next(1, 4);
-                    var employeeTeams = new HashSet<string>();
+                    HashSet<string> employeeTeams = new();
                     for (int j = 0; j < count; ++j)
                     {
                         employeeTeams.Add(Nomenclature.teams[generator.Next(4)]);
                     }
-                    e.Teams = employeeTeams;
+                    employee.Teams = employeeTeams;
                 }
 
-                employees.Add(e);
+                employees.Add(employee);
             }
 
             return employees;

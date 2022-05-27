@@ -2,6 +2,7 @@
 using EmployeeArrivalTrackerInfrastructure.Contracts;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,10 +13,12 @@ namespace EmployeeArrivalTrackerDomain.HostedService
     {
         private Timer timer;
         private readonly IServiceProvider serviceProvider;
+        private readonly ILogger<EmployeeArrivalHostedService> logger;
 
-        public EmployeeArrivalHostedService(IServiceProvider serviceProvider)
+        public EmployeeArrivalHostedService(IServiceProvider serviceProvider,ILogger<EmployeeArrivalHostedService> logger)
         {
             this.serviceProvider = serviceProvider;
+            this.logger = logger;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
@@ -38,8 +41,9 @@ namespace EmployeeArrivalTrackerDomain.HostedService
                     string response = await clientService.CallCliensServiceAsync();
                     tokenManager.AddTokenData(response);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    this.logger.LogError($"Error: {ex.InnerException.Message ?? ex.Message} Location: {ex.StackTrace}");
                 }
             };
         }

@@ -7,14 +7,12 @@ namespace EmployeeArrivalTrackerClient.Middleware
 {
     public class ExceptionMiddleware
     {
-
-        private readonly RequestDelegate _next;
-
+        private readonly RequestDelegate next;
         private readonly ILogger<ExceptionMiddleware> logger;
 
         public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger)
         {
-            _next = next;
+            this.next = next;
             this.logger = logger;
         }
 
@@ -22,7 +20,7 @@ namespace EmployeeArrivalTrackerClient.Middleware
         {
             try
             {
-                await _next(httpContext);
+                await this.next(httpContext);
             }
             catch (Exception ex)
             {
