@@ -24,6 +24,8 @@ namespace EmployeeArrivalTrackerDataAccess.Context
 
         public virtual DbSet<Employee> Employees { get; set; }
 
+        public  DbSet<EmployeeReport> EmployeeReport { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedTeamsNomenclature();

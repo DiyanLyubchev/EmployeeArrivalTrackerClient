@@ -1,5 +1,4 @@
-﻿using Common.Models.Employees;
-using EmployeeArrivalTrackerDataAccess.Data;
+﻿using EmployeeArrivalTrackerDataAccess.Data;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +8,6 @@ namespace EmployeeArrivalTrackerDataAccess.Contracts
     {
         void AddArrivalEmployees(List<EmployeeArrival> empList);
 
-        List<EmployeesVM> GetAllArrivalEmployeesBySpecificDate(DateTime currentDate);
+        List<EmployeeReport> GetAllArrivalEmployeesBySpecificDate();
     }
 }

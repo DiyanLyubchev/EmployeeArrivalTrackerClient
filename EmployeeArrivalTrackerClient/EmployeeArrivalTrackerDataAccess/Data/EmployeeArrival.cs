@@ -5,10 +5,10 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 {
     public class EmployeeArrival
     {
-        public EmployeeArrival(int employeeId, DateTime when)
+        public EmployeeArrival(int employeeId, DateTime whenArrival)
         {
             this.EmployeeId = employeeId;
-            this.When = when;
+            this.WhenArrival = whenArrival;
         }
 
         [Key]
@@ -18,6 +18,6 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 
         public virtual Employee Employee { get; private set; }
 
-        public DateTime When { get; private set; }
+        public DateTime WhenArrival { get; private set; }
     }
 }

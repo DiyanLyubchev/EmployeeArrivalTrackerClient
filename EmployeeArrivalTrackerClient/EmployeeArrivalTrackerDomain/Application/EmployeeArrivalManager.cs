@@ -22,10 +22,10 @@ namespace EmployeeArrivalTrackerDomain.Application
 
         public List<EmployeesVM> GetAllArrivalEmployees()
         {
-            DateTime currentDate = Utils.GetCurrentDate();
-            var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate(currentDate);
+            var emplData = this.dbManager.GetAllArrivalEmployeesBySpecificDate();
 
-            return emplData;
+            return EmployeeAdapter.Transform(emplData);
+           // return emplData;
         }
 
         public bool AddArrivalEmployees(List<ProducerArrivalEmployeesVM> data, string token)

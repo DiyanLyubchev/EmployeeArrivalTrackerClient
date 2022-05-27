@@ -13,6 +13,8 @@ namespace Common.Models.Employees
 
         public HashSet<string> Teams { get; set; }
 
+        public string TeamDescription { get; set; }
+
         public string Role { get; set; }
 
         public string Email { get; set; }
