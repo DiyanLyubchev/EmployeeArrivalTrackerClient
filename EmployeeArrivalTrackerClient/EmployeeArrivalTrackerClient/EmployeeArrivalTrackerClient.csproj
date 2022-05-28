@@ -16,4 +16,8 @@
     <ProjectReference Include="..\Common\Common.csproj" />
     <ProjectReference Include="..\EmployeeArrivalTrackerDomain\EmployeeArrivalTrackerDomain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 </Project>

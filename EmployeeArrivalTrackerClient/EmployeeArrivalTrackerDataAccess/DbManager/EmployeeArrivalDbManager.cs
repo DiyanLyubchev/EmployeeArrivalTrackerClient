@@ -45,7 +45,6 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
             var dataVm = this.context.EmployeeReport
                 .FromSqlRaw(query)
                 .AsNoTracking()
-                .OrderByDescending(x => x.WhenArrival)
                 .ToList();
 
             return dataVm;
@@ -53,26 +52,28 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
 
         public List<EmployeesVM> GetAllArrivalEmployeesByEF()
         {
-            List<EmployeesVM> dataVm = this.context.Employees
-                 .Include(x => x.EmployeeArrival)
-                 .Include(x => x.RolesNomenclature)
-                 .Include(x => x.EmployeeTeamsNomenclatures)
-                 .Where(x =>
-                       x.RolesNomenclature.Id == x.RolesNomenclatureId &&
-                       x.EmployeeArrival.EmployeeId == x.Id)
-                 .Select(x => new EmployeesVM
-                 {
-                     Id = x.Id,
-                     Name = x.Name,
-                     SurName = x.SurName,
-                     Age = x.Age,
-                     Email = x.Email,
-                     ManagerId = x.ManagerId,
-                     Role = x.RolesNomenclature.Name,
-                     WhenArrival = x.EmployeeArrival.WhenArrival
-                 })
-                 .OrderByDescending(x => x.WhenArrival)
-                 .ToList();
+            List<EmployeesVM> dataVm = (from employee in this.context.Employees
+                                        join arrival in this.context.EmployeeArrivals
+                                        on employee.Id equals arrival.EmployeeId
+                                        join roles in this.context.Roles
+                                        on employee.RolesNomenclatureId equals roles.Id
+                                        join empTeam in this.context.EmployeeTeamsNomenclatures
+                                        on employee.Id equals empTeam.EmployeeId
+                                        join teams in this.context.Teams
+                                        on empTeam.TeamsNomenclatureId equals teams.Id
+                                        select new EmployeesVM
+                                        {
+                                            Id = employee.Id,
+                                            Name = employee.Name,
+                                            SurName = employee.SurName,
+                                            Age = employee.Age,
+                                            Email = employee.Email,
+                                            ManagerId = employee.ManagerId,
+                                            Role = roles.Name,
+                                            TeamDescription = teams.Name,
+                                            WhenArrival = arrival.WhenArrival
+                                        })
+                                        .ToList();
 
             return dataVm;
         }

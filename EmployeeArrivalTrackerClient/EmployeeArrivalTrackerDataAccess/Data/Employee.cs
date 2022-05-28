@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
@@ -37,6 +38,7 @@ namespace EmployeeArrivalTrackerDataAccess.Data
 
         public virtual ICollection<EmployeeTeamsNomenclature>  EmployeeTeamsNomenclatures { get; private set; }
 
+        [ForeignKey(nameof(RolesNomenclature))]
         public int? RolesNomenclatureId { get; private set; }
 
         public virtual RolesNomenclature RolesNomenclature { get; private set; }

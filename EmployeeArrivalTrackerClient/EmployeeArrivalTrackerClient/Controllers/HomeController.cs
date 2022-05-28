@@ -18,6 +18,7 @@ namespace EmployeeArrivalTrackerClient.Controllers
             return View(this.manager.GetAllArrivalEmployees());
         }
 
+        [HttpGet]
         public IActionResult Privacy()
         {
             return View();
