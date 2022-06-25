@@ -21,12 +21,15 @@ namespace EmployeeArrivalTrackerClient.Middleware
             try
             {
                 this.logger.LogInformation($"Service request time: {DateTime.Now:dd.MM.yyyy hh:mm:ss}");
+
                 await this.next(httpContext);
+
                 this.logger.LogInformation($"Service response time: {DateTime.Now:dd.MM.yyyy hh:mm:ss}");
             }
             catch (Exception ex)
             {
                 httpContext.Session.Clear();
+
                 this.logger.LogError($"Exception {ex.InnerException?.Message } { ex.Message } {Environment.NewLine} Location: {ex.StackTrace}");
                 string errorMsg = ex.InnerException?.Message ?? ex.Message;
                 httpContext.Session.SetString("Error", $"{errorMsg} ");
