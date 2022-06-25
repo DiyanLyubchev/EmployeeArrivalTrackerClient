@@ -22,6 +22,7 @@ namespace EmployeeArrivalTrackerClient
         public void ConfigureServices(IServiceCollection services)
         {
             services.ResolveServices();
+            services.ResolveControllersOptions();
             services.ResolveContext(this.Configuration);
             services.AddControllersWithViews();
             services.AddHostedService<EmployeeArrivalHostedService>();

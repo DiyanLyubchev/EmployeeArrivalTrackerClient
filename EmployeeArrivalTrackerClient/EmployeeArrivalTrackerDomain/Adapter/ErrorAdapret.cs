@@ -9,7 +9,11 @@ namespace EmployeeArrivalTrackerDomain.Adapter
         public static ErrorViewModel Transform(byte[] error)
         {
             string errorMsg = Encoding.ASCII.GetString(error);
-            return new ErrorViewModel(errorMsg, DateTime.Now.ToString("yyyy-MM-dd"));
+            return new ErrorViewModel
+            {
+                ErrorMsg = errorMsg,
+                Time = DateTime.Now.ToString("yyyy-MM-dd")
+            };
         }
     }
 }

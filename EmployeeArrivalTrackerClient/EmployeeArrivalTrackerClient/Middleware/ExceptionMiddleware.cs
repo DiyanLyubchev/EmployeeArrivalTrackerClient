@@ -20,7 +20,9 @@ namespace EmployeeArrivalTrackerClient.Middleware
         {
             try
             {
+                Console.WriteLine("Service request");
                 await this.next(httpContext);
+                Console.WriteLine("Service response");
             }
             catch (Exception ex)
             {

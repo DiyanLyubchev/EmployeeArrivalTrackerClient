@@ -3,8 +3,11 @@ using EmployeeArrivalTrackerDataAccess.Contracts;
 using EmployeeArrivalTrackerDataAccess.DbManager;
 using EmployeeArrivalTrackerDomain.Application;
 using EmployeeArrivalTrackerDomain.Contracts;
+using EmployeeArrivalTrackerDomain.Filters;
+using EmployeeArrivalTrackerDomain.Validators;
 using EmployeeArrivalTrackerInfrastructure;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +38,23 @@ namespace EmployeeArrivalTrackerClient.Extentions
              options.UseSqlServer(
              configuration.GetConnectionString("DefaultConnection")));
             return services;
+        }
+
+        public static void ResolveControllersOptions(this IServiceCollection services)
+        {
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<ValidationFilter>();
+
+            })
+            .ConfigureApiBehaviorOptions(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            })
+            .AddFluentValidation(options =>
+            {
+                options.RegisterValidatorsFromAssemblyContaining<ProducerArrivalEmployeesVMValidator>();
+            });
         }
     }
 }

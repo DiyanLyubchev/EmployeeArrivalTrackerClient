@@ -7,8 +7,9 @@ namespace EmployeeArrivalTrackerClient.Controllers
     public class HomeController : Controller
     {
         private readonly IEmployeeArrivalManager manager;
+
         public HomeController(IEmployeeArrivalManager manager)
-        {;
+        {
             this.manager = manager;
         }
 

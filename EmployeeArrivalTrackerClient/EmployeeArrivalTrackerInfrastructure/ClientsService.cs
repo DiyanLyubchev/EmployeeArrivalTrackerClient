@@ -21,7 +21,7 @@ namespace EmployeeArrivalTrackerInfrastructure
             using (var client = new HttpClient())
             {
                 var date = DateTime.Now.ToString("yyyy-MM-dd");
-                string url = new($"http://localhost:51397/api/clients/subscribe?date={date}&callback=https://localhost:44383/api/employeearrivalproducer/produce");
+                string url = new($"http://localhost:51397/api/clients/subscribe?date={date}&callback=https://localhost:5001/api/employeearrivalproducer/produce");
                 Uri uri = new(url);
 
                 client.DefaultRequestHeaders.Add("Accept-Client", "Fourth-Monitor");
