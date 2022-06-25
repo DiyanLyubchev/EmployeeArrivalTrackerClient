@@ -20,9 +20,9 @@ namespace EmployeeArrivalTrackerClient.Middleware
         {
             try
             {
-                Console.WriteLine("Service request");
+                this.logger.LogInformation($"Service request time: {DateTime.Now:dd.MM.yyyy hh:mm:ss}");
                 await this.next(httpContext);
-                Console.WriteLine("Service response");
+                this.logger.LogInformation($"Service response time: {DateTime.Now:dd.MM.yyyy hh:mm:ss}");
             }
             catch (Exception ex)
             {

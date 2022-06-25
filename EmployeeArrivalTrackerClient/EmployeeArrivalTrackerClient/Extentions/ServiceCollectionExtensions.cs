@@ -44,8 +44,8 @@ namespace EmployeeArrivalTrackerClient.Extentions
         {
             services.AddControllers(options =>
             {
+                options.Filters.Add<LogRequestResponseFilter>();
                 options.Filters.Add<ValidationFilter>();
-
             })
             .ConfigureApiBehaviorOptions(options =>
             {

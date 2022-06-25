@@ -14,7 +14,6 @@ namespace EmployeeArrivalTrackerDomain.Filters
 
         public ValidationFilter(ILogger<ValidationFilter> logger)
         {
-
             this.logger = logger;
         }
 
