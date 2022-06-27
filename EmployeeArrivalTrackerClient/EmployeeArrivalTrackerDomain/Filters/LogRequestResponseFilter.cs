@@ -19,18 +19,20 @@ namespace EmployeeArrivalTrackerDomain.Filters
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            Lazy<ICollection<object>> location = new(() => GetLocation(context));
+            ICollection<object> location = GetLocation(context);
 
             LogRequest(context, location);
             await next();
             LogResponse(context, location);
         }
 
-        private void LogRequest(ActionExecutingContext context, Lazy<ICollection<object>> location)
+        private void LogRequest(ActionExecutingContext context, ICollection<object> location)
         {
-            if (location.Value.Contains("Produce"))
+            Lazy<IDictionary<string, object>> parameterFromAction = new(() => GetParameter(context));
+
+            if (location.Contains("Produce"))
             {
-                var request = context.ActionArguments["data"] as List<ProducerArrivalEmployeesVM>;
+                var request = parameterFromAction.Value["data"] as List<ProducerArrivalEmployeesVM>;
 
                 if (request is not null)
                 {
@@ -39,15 +41,20 @@ namespace EmployeeArrivalTrackerDomain.Filters
             }
         }
 
-        private void LogResponse(ActionExecutingContext context, Lazy<ICollection<object>> location)
+        private void LogResponse(ActionExecutingContext context, ICollection<object> location)
         {
             this.logger.LogInformation($"Response code is: {context.HttpContext.Response.StatusCode} " +
-                $"Controller: {location.Value.First()}  Action: {location.Value.Last()}");
+                $"Controller: {location.First()}  Action: {location.Last()}");
         }
 
-        private ICollection<object> GetLocation(ActionExecutingContext context)
+        private static ICollection<object> GetLocation(ActionExecutingContext context)
         {
             return context.RouteData.Values.Values;
+        }
+
+        private static IDictionary<string, object> GetParameter(ActionExecutingContext context)
+        {
+            return context.ActionArguments;
         }
     }
 }
