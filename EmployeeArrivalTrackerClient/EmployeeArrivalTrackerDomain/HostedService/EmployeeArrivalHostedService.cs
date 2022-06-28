@@ -1,8 +1,8 @@
 ﻿using EmployeeArrivalTrackerDomain.Contracts;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
+using log4net;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,12 +13,11 @@ namespace EmployeeArrivalTrackerDomain.HostedService
     {
         private Timer timer;
         private readonly IServiceProvider serviceProvider;
-        private readonly ILogger<EmployeeArrivalHostedService> logger;
+        private static readonly ILog logger = LogManager.GetLogger(typeof(EmployeeArrivalHostedService));
 
-        public EmployeeArrivalHostedService(IServiceProvider serviceProvider,ILogger<EmployeeArrivalHostedService> logger)
+        public EmployeeArrivalHostedService(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            this.logger = logger;
         }
 
         public Task StartAsync(CancellationToken stoppingToken)
@@ -43,7 +42,7 @@ namespace EmployeeArrivalTrackerDomain.HostedService
                 }
                 catch (Exception ex)
                 {
-                    this.logger.LogError($"Error: {ex.InnerException.Message ?? ex.Message} Location: {ex.StackTrace}");
+                    logger.Error($"Error: {ex.InnerException.Message ?? ex.Message} Location: {ex.StackTrace}");
                 }
             };
         }
