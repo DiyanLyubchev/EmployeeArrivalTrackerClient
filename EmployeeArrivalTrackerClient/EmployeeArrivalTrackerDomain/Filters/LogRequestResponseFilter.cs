@@ -32,9 +32,14 @@ namespace EmployeeArrivalTrackerDomain.Filters
 
             if (location.Contains("Produce"))
             {
-                var request = parameterFromAction.Value["data"] as List<ProducerArrivalEmployeesVM>;
+                //var request = parameterFromAction.Value["data"] as List<ProducerArrivalEmployeesVM>;
+                //if (request is not null)
+                //{
+                //    this.logger.LogInformation($"Arrival Employees are: {request.Count}");
+                //}
 
-                if (request is not null)
+                //Pattern Matching -> same as the above example
+                if (parameterFromAction.Value["data"] is List<ProducerArrivalEmployeesVM> request)
                 {
                     this.logger.LogInformation($"Arrival Employees are: {request.Count}");
                 }

@@ -32,10 +32,11 @@ namespace EmployeeArrivalTrackerDomain.Filters
 
         private ErrorViewModel CreateResponseModel(ActionExecutingContext context)
         {
-
             ErrorViewModel response = new();
 
-            response.ErrorMsg = string.Join(Environment.NewLine, context.ModelState.Values.Where(e => e.Errors.Count > 0)
+            response.ErrorMsg = string.Join(
+                                             Environment.NewLine, 
+                                             context.ModelState.Values.Where(e => e.Errors.Count > 0)
                          .SelectMany(E => E.Errors)
                          .Select(E => E.ErrorMessage)
                          .ToList());
