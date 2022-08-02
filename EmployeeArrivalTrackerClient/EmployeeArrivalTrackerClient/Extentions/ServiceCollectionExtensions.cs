@@ -1,5 +1,6 @@
 ﻿using EmployeeArrivalTrackerDataAccess.Context;
 using EmployeeArrivalTrackerDataAccess.Contracts;
+using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDataAccess.DbManager;
 using EmployeeArrivalTrackerDomain.Application;
 using EmployeeArrivalTrackerDomain.Contracts;
@@ -20,7 +21,7 @@ namespace EmployeeArrivalTrackerClient.Extentions
         {
             //Db Managers
             services.AddScoped<IEmployeeArrivalDbManager, EmployeeArrivalDbManager>();
-            services.AddScoped<ITokenDbManager, TokenDbManager>();
+            services.AddScoped<IGenericRepository<Tokens>, GenericRepository<Tokens>>();
 
             //Domain Managers
             services.AddScoped<IEmployeeArrivalManager, EmployeeArrivalManager>();

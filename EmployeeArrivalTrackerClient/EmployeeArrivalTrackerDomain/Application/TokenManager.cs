@@ -12,11 +12,10 @@ namespace EmployeeArrivalTrackerDomain.Application
 {
     public class TokenManager : ITokenManager
     {
-        private readonly ITokenDbManager dbManager;
-
-        public TokenManager(ITokenDbManager dbManager)
+        private IGenericRepository<Tokens> repository;
+        public TokenManager(IGenericRepository<Tokens> repository)
         {
-            this.dbManager = dbManager;
+            this.repository = repository;
         }
 
         public bool AddTokenData(string tokenData)
@@ -31,7 +30,8 @@ namespace EmployeeArrivalTrackerDomain.Application
                 }
 
                 Tokens table = TokenAdapter.Transform(tokenModel);
-                this.dbManager.AddToken(table);
+                this.repository.Insert(table);
+                this.repository.Save();
 
                 return true;
             }
@@ -41,7 +41,7 @@ namespace EmployeeArrivalTrackerDomain.Application
 
         public bool GetTokenIfExist(string token)
         {
-            var tableToken = this.dbManager.GetToken(token);
+            var tableToken = this.repository.GetFirstOrDefault(x => x.Token == token);
 
             if (tableToken != null)
             {

@@ -1,6 +1,7 @@
 ﻿using Common.Exceptions;
 using EmployeeArrivalTrackerDataAccess.Context;
 using EmployeeArrivalTrackerDataAccess.Contracts;
+using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDataAccess.DbManager;
 using EmployeeArrivalTrackerDomain.Application;
 using EmployeeArrivalTrackerTest.Util;
@@ -20,10 +21,10 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         {
             var tokenData = TokensGenerator.GenerateTokenTable();
 
-            var mockDbManager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<IGenericRepository<Tokens>>();
 
             mockDbManager
-                .Setup(x => x.GetToken(token))
+                .Setup(x => x.GetFirstOrDefault(x => x.Token == token))
                 .Returns(tokenData);
 
             var manager = new TokenManager(mockDbManager.Object);
@@ -37,10 +38,11 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         {
             string notValidToken = $"{token}-23dss";
             var tokenData = TokensGenerator.GenerateTokenTable();
-            var mockDbManager = new Mock<ITokenDbManager>();
+
+            var mockDbManager = new Mock<IGenericRepository<Tokens>>();
 
             mockDbManager
-                .Setup(x => x.GetToken(token))
+                .Setup(x => x.GetFirstOrDefault(x => x.Token == token))
                 .Returns(tokenData);
 
             var manager = new TokenManager(mockDbManager.Object);
@@ -52,7 +54,8 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void AddTokenDataValid_Test()
         {
-            var mockDbManager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<IGenericRepository<Tokens>>();
+
             string token = TokensGenerator.GenerateTokenModel();
 
             var manager = new TokenManager(mockDbManager.Object);
@@ -64,7 +67,7 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void AddTokenDataNotValid_Test()
         {
-            var mockDbManager = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<IGenericRepository<Tokens>>();
 
             var manager = new TokenManager(mockDbManager.Object);
 
@@ -76,10 +79,10 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [ExpectedException(typeof(TokenException))]
         public void ThrowException_IfTokenIsNull_Test()
         {
-            var mockDbMngr = new Mock<ITokenDbManager>();
+            var mockDbManager = new Mock<IGenericRepository<Tokens>>();
             string token = TokensGenerator.GenerateTokenModelWithNullToken();
 
-            var sut = new TokenManager(mockDbMngr.Object);
+            var sut = new TokenManager(mockDbManager.Object);
 
             sut.AddTokenData(token);
         }
@@ -87,15 +90,15 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void AddTokenDB_Test()
         {
-            var mockDbMngr = new Mock<ITokenDbManager>();
             var token = TokensGenerator.GenerateTokenTable();
 
             var options = TestUtilities.GetOptions(nameof(AddTokenDB_Test));
 
             using (var context = new EmployeeArrivalContext(options))
             {
-                var dbManager = new TokenDbManager(context);
-                dbManager.AddToken(token);
+                var dbManager = new GenericRepository<Tokens>(context);
+                dbManager.Insert(token);
+                dbManager.Save();
 
                 var sut = context.Tokens.Count();
 
@@ -106,18 +109,17 @@ namespace EmployeeArrivalTrackerTest.TokenShould
         [TestMethod]
         public void GetTokenDB_Test()
         {
-
-            var mockDbMngr = new Mock<ITokenDbManager>();
             var tokenData = TokensGenerator.GenerateTokenTable();
 
             var options = TestUtilities.GetOptions(nameof(GetTokenDB_Test));
 
             using (var context = new EmployeeArrivalContext(options))
             {
-                var dbManager = new TokenDbManager(context);
-                dbManager.AddToken(tokenData);
+                var dbManager = new GenericRepository<Tokens>(context);
+                dbManager.Insert(tokenData);
+                dbManager.Save();
 
-                var sut = dbManager.GetToken(token);
+                var sut = dbManager.GetById(tokenData.Id);
 
                 Assert.IsNotNull(sut);
             };
