@@ -20,8 +20,9 @@ namespace EmployeeArrivalTrackerClient.Extentions
         public static IServiceCollection ResolveServices(this IServiceCollection services)
         {
             //Db Managers
-            services.AddScoped<IEmployeeArrivalDbManager, EmployeeArrivalDbManager>();
             services.AddScoped<IGenericRepository<Tokens>, GenericRepository<Tokens>>();
+            services.AddScoped<IGenericRepository<EmployeeArrival>, GenericRepository<EmployeeArrival>>();
+            services.AddScoped<IGenericRepository<EmployeeReport>, GenericRepository<EmployeeReport>>();
 
             //Domain Managers
             services.AddScoped<IEmployeeArrivalManager, EmployeeArrivalManager>();

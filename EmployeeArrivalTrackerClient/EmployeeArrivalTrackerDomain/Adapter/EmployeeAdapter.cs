@@ -16,7 +16,7 @@ namespace EmployeeArrivalTrackerDomain.Adapter
                 .ToList();
         }
 
-        public static List<EmployeesVM> Transform(List<EmployeeReport> dbData)
+        public static List<EmployeesVM> Transform(IQueryable<EmployeeReport> dbData)
         {
             return dbData
                 .Select(x =>

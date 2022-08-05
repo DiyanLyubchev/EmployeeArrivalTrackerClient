@@ -19,6 +19,18 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
             table = context.Set<T>();
         }
 
+        public IQueryable<T> GetQueryable()
+        {
+            IQueryable<T> query = this.context.Set<T>();
+            return query;
+        }
+
+        public IQueryable<T> GetQueryableByQuery(string query)
+        {
+            IQueryable<T> queryableResult = this.context.Set<T>().FromSqlRaw(query);
+            return queryableResult;
+        }
+
         public IEnumerable<T> GetAll()
         {
             return this.table.ToList();
@@ -46,6 +58,11 @@ namespace EmployeeArrivalTrackerDataAccess.DbManager
         public void Insert(T obj)
         {
             this.table.Add(obj);
+        }
+
+        public void InsertAll(IEnumerable<T> entities)
+        {
+            this.table.AddRange(entities);
         }
 
         public void Update(T obj)

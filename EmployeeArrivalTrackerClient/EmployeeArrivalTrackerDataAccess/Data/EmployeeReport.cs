@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeeArrivalTrackerDataAccess.Data
 {
@@ -25,6 +21,5 @@ namespace EmployeeArrivalTrackerDataAccess.Data
         public string RoleName { get; set; }
 
         public DateTime WhenArrival { get; private set; }
-
     }
 }
