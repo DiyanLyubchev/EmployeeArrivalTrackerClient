@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -28,9 +29,10 @@ namespace EmployeeArrivalTrackerClient.Middleware
             }
             catch (Exception ex)
             {
-                httpContext.Session.Clear();
+               
+                httpContext.Session.Clear(); 
 
-                this.logger.LogError($"Exception {ex.InnerException?.Message } { ex.Message } {Environment.NewLine} Location: {ex.StackTrace}");
+                this.logger.LogError($"Env: {Utils.GetCurrentEnvironment()} {Environment.NewLine} Exception {ex.InnerException?.Message } { ex.Message } {Environment.NewLine} Location: {ex.StackTrace}");
                 string errorMsg = ex.InnerException?.Message ?? ex.Message;
                 httpContext.Session.SetString("Error", $"{errorMsg} ");
                 httpContext.Response.Redirect("/home/error");

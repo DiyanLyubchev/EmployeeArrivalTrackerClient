@@ -1,4 +1,5 @@
-﻿using EmployeeArrivalTrackerInfrastructure.Contracts;
+﻿using Common;
+using EmployeeArrivalTrackerInfrastructure.Contracts;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Net.Http;
@@ -35,7 +36,7 @@ namespace EmployeeArrivalTrackerInfrastructure
                 }
                 else
                 {
-                    this.logger.LogError($"Service call was not successful! Message: {await responseMsg.Content.ReadAsStringAsync()} Status code: {(int)responseMsg.StatusCode}");
+                    this.logger.LogError($"Service call was not successful! Env: {Utils.GetCurrentEnvironment()} Message: {await responseMsg.Content.ReadAsStringAsync()} Status code: {(int)responseMsg.StatusCode}");
                 }
 
                 return responseMessage;

@@ -9,5 +9,12 @@ namespace Common
             DateTime date = DateTime.Now;
             return date.Date;
         }
+
+        public static string GetCurrentEnvironment() 
+        {
+             string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            return environment;
+        }
     }
 }
