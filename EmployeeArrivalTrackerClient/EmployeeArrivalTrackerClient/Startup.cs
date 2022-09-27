@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Prometheus;
 using System;
 
 namespace EmployeeArrivalTrackerClient
@@ -32,6 +33,7 @@ namespace EmployeeArrivalTrackerClient
             services.AddHostedService<EmployeeArrivalHostedService>();
 
             services.AddHealthChecks()
+                    .ForwardToPrometheus()
                     .AddDbContextCheck<EmployeeArrivalContext>();
 
             services.AddDistributedMemoryCache();
@@ -47,6 +49,7 @@ namespace EmployeeArrivalTrackerClient
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMetricServer();//Starting the metrics exporter, will expose "/metrics"
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,11 +68,17 @@ namespace EmployeeArrivalTrackerClient
 
             app.UseRouting();
 
+            //adding metrics related to HTTP
+            app.UseHttpMetrics(options =>
+            {
+                options.AddCustomLabel("host", context => context.Request.Host.Host);
+            });
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapHealthChecks("/healthz");
-
+                endpoints.MapHealthChecks("/metrics");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
