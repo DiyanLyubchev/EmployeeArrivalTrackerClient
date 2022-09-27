@@ -1,5 +1,9 @@
 using EmployeeArrivalTrackerClient.Extentions;
+using EmployeeArrivalTrackerDataAccess.Context;
+using EmployeeArrivalTrackerDomain.Filters;
 using EmployeeArrivalTrackerDomain.HostedService;
+using EmployeeArrivalTrackerDomain.Validators;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +30,9 @@ namespace EmployeeArrivalTrackerClient
             services.ResolveContext(this.Configuration);
             services.AddControllersWithViews();
             services.AddHostedService<EmployeeArrivalHostedService>();
+
+            services.AddHealthChecks()
+                    .AddDbContextCheck<EmployeeArrivalContext>();
 
             services.AddDistributedMemoryCache();
 
@@ -61,6 +68,8 @@ namespace EmployeeArrivalTrackerClient
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHealthChecks("/healthz");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
