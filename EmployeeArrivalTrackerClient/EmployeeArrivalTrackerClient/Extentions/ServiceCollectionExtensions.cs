@@ -5,6 +5,7 @@ using EmployeeArrivalTrackerDataAccess.DbManager;
 using EmployeeArrivalTrackerDomain.Application;
 using EmployeeArrivalTrackerDomain.Contracts;
 using EmployeeArrivalTrackerDomain.Filters;
+using EmployeeArrivalTrackerDomain.HealthCheck;
 using EmployeeArrivalTrackerDomain.Validators;
 using EmployeeArrivalTrackerInfrastructure;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
@@ -12,6 +13,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Prometheus;
 
 namespace EmployeeArrivalTrackerClient.Extentions
 {
@@ -57,6 +59,17 @@ namespace EmployeeArrivalTrackerClient.Extentions
             {
                 options.RegisterValidatorsFromAssemblyContaining<ProducerArrivalEmployeesVMValidator>();
             });
+        }
+
+        public static void ResolveHealthCheck(this IServiceCollection services)
+        {
+            services.AddHostedService<StartupBackgroundService>();
+            services.AddSingleton<StartupHealthCheck>();
+            services.AddSingleton<DbConnectionHealthCheck>();
+
+            services.AddHealthChecks().AddCheck<StartupHealthCheck>("Startup", tags: new[] { "ready" })
+                                      .AddCheck<DbConnectionHealthCheck>("DbConnection", tags: new[] { "live-db" })
+                                      .ForwardToPrometheus();
         }
     }
 }
