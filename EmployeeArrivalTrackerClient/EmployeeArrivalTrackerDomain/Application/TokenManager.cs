@@ -6,14 +6,10 @@ using EmployeeArrivalTrackerDataAccess.Data;
 using EmployeeArrivalTrackerDomain.Adapter;
 using EmployeeArrivalTrackerDomain.Contracts;
 using System;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 
-[assembly: InternalsVisibleTo("EmployeeArrivalTrackerInfrastructure")]
-[assembly: InternalsVisibleTo("EmployeeArrivalTrackerClient")]
-[assembly: InternalsVisibleTo("EmployeeArrivalTrackerTest")]
 namespace EmployeeArrivalTrackerDomain.Application
-{ 
+{
     internal class TokenManager : ITokenManager
     {
         private IGenericRepository<Tokens> repository;

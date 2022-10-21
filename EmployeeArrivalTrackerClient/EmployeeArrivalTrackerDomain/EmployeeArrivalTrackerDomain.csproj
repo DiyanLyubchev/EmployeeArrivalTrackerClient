@@ -24,4 +24,10 @@
     <ProjectReference Include="..\EmployeeArrivalTrackerInfrastructure\EmployeeArrivalTrackerInfrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="EmployeeArrivalTrackerInfrastructure" />
+    <InternalsVisibleTo Include="EmployeeArrivalTrackerClient" />
+    <InternalsVisibleTo Include="EmployeeArrivalTrackerTest" />
+  </ItemGroup>
+
 </Project>
