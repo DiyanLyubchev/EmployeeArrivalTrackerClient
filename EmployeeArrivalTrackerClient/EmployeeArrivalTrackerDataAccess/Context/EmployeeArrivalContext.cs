@@ -16,15 +16,15 @@ namespace EmployeeArrivalTrackerDataAccess.Context
 
         public virtual DbSet<Tokens> Tokens { get; set; }
 
-        public virtual DbSet<TeamsNomenclature>  Teams { get; set; }
+        public virtual DbSet<TeamsNomenclature> Teams { get; set; }
 
-        public virtual DbSet<RolesNomenclature>  Roles { get; set; }
+        public virtual DbSet<RolesNomenclature> Roles { get; set; }
 
         public virtual DbSet<EmployeeTeamsNomenclature> EmployeeTeamsNomenclatures { get; set; }
 
         public virtual DbSet<Employee> Employees { get; set; }
 
-        public  DbSet<EmployeeReport> EmployeeReport { get; set; }
+        public DbSet<EmployeeReport> EmployeeReport { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

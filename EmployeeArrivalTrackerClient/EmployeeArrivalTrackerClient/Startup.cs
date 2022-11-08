@@ -71,24 +71,7 @@ namespace EmployeeArrivalTrackerClient
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                          name: "default",
-                          pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapHealthChecks("/metrics");
-
-                endpoints.MapHealthChecks("/healthz/ready", new HealthCheckOptions
-                {
-                    Predicate = healthCheck => healthCheck.Tags.Contains("ready")
-                });
-
-                endpoints.MapHealthChecks("/healthz/live-db", new HealthCheckOptions
-                {
-                    Predicate = healthCheck => healthCheck.Tags.Contains("live-db")
-                });
-            });
-
+            app.ResolveEndpoints();
         }
     }
 }

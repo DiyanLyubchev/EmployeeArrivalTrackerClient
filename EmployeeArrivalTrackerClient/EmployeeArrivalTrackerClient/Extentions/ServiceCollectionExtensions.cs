@@ -41,6 +41,7 @@ namespace EmployeeArrivalTrackerClient.Extentions
             services.AddDbContext<EmployeeArrivalContext>(options =>
              options.UseSqlServer(
              configuration.GetConnectionString("DefaultConnection")));
+
             return services;
         }
 
@@ -63,13 +64,13 @@ namespace EmployeeArrivalTrackerClient.Extentions
 
         public static void ResolveHealthCheck(this IServiceCollection services)
         {
-            services.AddHostedService<StartupBackgroundService>();
-            services.AddSingleton<StartupHealthCheck>();
-            services.AddSingleton<DbConnectionHealthCheck>();
+            services.AddTransient<DbConnectionHealthCheck<EmployeeArrivalContext>>();
 
-            services.AddHealthChecks().AddCheck<StartupHealthCheck>("Startup", tags: new[] { "ready" })
-                                      .AddCheck<DbConnectionHealthCheck>("DbConnection", tags: new[] { "live-db" })
+            //Second is for testing
+            services.AddHealthChecks().AddCheck<DbConnectionHealthCheck<EmployeeArrivalContext>>("DbConnection 1", tags: new[] { "ready" })
+                                      .AddCheck<DbConnectionHealthCheck<EmployeeArrivalContext>>("DbConnection 2", tags: new[] { "ready" })
                                       .ForwardToPrometheus();
+
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Threading.Tasks;
 using System.Threading;
-using EmployeeArrivalTrackerDataAccess.Context;
 using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace EmployeeArrivalTrackerDomain.HealthCheck
 {
-    public class DbConnectionHealthCheck : IHealthCheck
+    public class DbConnectionHealthCheck<TContext> : IHealthCheck where TContext : DbContext
     {
         private readonly IServiceProvider serviceProvider;
 
@@ -16,19 +17,26 @@ namespace EmployeeArrivalTrackerDomain.HealthCheck
             this.serviceProvider = serviceProvider;
         }
 
-        public Task<HealthCheckResult> CheckHealthAsync(
+        public async Task<HealthCheckResult> CheckHealthAsync(
             HealthCheckContext context, CancellationToken cancellationToken = default)
-        {
-            using var scope = this.serviceProvider.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<EmployeeArrivalContext>();
 
-            bool doesDatabaseConnect = dbContext.Database.CanConnect();
+        {
+            Type type = typeof(TContext);
+            bool doesDatabaseConnect = false;
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var scopeDbContext = services.GetService<TContext>();
+
+                doesDatabaseConnect = await scopeDbContext.Database.CanConnectAsync(cancellationToken);
+            }
+         
             if (doesDatabaseConnect)
             {
-                return Task.FromResult(HealthCheckResult.Healthy("Db connection completed."));
+                return HealthCheckResult.Healthy($"{type.Name} connection completed - {context.Registration.Name}");
             }
 
-            return Task.FromResult(HealthCheckResult.Unhealthy("Db connection faild."));
+            return HealthCheckResult.Unhealthy($"{type.Name} connection faild - {context.Registration.Name}");
         }
     }
 }
