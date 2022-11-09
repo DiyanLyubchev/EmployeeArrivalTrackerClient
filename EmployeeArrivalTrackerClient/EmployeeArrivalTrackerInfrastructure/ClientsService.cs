@@ -1,6 +1,8 @@
 ﻿using Common;
+using Common.Options;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,10 +12,11 @@ namespace EmployeeArrivalTrackerInfrastructure
     public class ClientsService : IClientsService
     {
         private readonly ILogger<ClientsService> logger;
-
-        public ClientsService(ILogger<ClientsService> logger)
+        private readonly InfrastructureOptions options;
+        public ClientsService(ILogger<ClientsService> logger, IOptions<InfrastructureOptions> options)
         {
             this.logger = logger;
+            this.options = options.Value;
         }
 
         public async Task<string> CallCliensServiceAsync()
@@ -22,7 +25,7 @@ namespace EmployeeArrivalTrackerInfrastructure
             using (var client = new HttpClient())
             {
                 var date = DateTime.Now.ToString("yyyy-MM-dd");
-                string url = new($"http://localhost:51397/api/clients/subscribe?date={date}&callback=https://localhost:5001/api/employeearrivalproducer/produce");
+                string url = new($"{this.options.TrackerApiUrl}{date}&callback={this.options.CallBackUrl}");
                 Uri uri = new(url);
 
                 client.DefaultRequestHeaders.Add("Accept-Client", "Fourth-Monitor");

@@ -1,3 +1,4 @@
+using Common.Options;
 using EmployeeArrivalTrackerClient.Extentions;
 using EmployeeArrivalTrackerDataAccess.Context;
 using EmployeeArrivalTrackerDomain.HostedService;
@@ -38,6 +39,8 @@ namespace EmployeeArrivalTrackerClient
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+
+            services.Configure<InfrastructureOptions>(Configuration.GetSection(nameof(InfrastructureOptions)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
