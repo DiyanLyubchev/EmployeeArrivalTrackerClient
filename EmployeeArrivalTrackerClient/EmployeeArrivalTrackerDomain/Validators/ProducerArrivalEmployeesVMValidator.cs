@@ -17,7 +17,7 @@ namespace EmployeeArrivalTrackerDomain.Validators
                     .Custom(ValidateDate);
         }
 
-        private void ValidateDate(DateTime date, ValidationContext<ProducerArrivalEmployeesVM> context)
+        private void ValidateDate<TObject>(DateTime date, ValidationContext<TObject> context)
         {
             try
             {
