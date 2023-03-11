@@ -9,6 +9,7 @@ using EmployeeArrivalTrackerDomain.HealthCheck;
 using EmployeeArrivalTrackerDomain.Validators;
 using EmployeeArrivalTrackerInfrastructure;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -55,11 +56,10 @@ namespace EmployeeArrivalTrackerClient.Extentions
             .ConfigureApiBehaviorOptions(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
-            })
-            .AddFluentValidation(options =>
-            {
-                options.RegisterValidatorsFromAssemblyContaining<ProducerArrivalEmployeesVMValidator>();
             });
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssemblyContaining<ProducerArrivalEmployeesVMValidator>();
         }
 
         public static void ResolveHealthCheck(this IServiceCollection services)
