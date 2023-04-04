@@ -11,10 +11,15 @@ using EmployeeArrivalTrackerInfrastructure;
 using EmployeeArrivalTrackerInfrastructure.Contracts;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Prometheus;
+using System.Reflection;
+using System;
+using System.Linq;
 
 namespace EmployeeArrivalTrackerClient.Extentions
 {
@@ -69,8 +74,33 @@ namespace EmployeeArrivalTrackerClient.Extentions
             //Second is for testing
             services.AddHealthChecks().AddCheck<DbConnectionHealthCheck<EmployeeArrivalContext>>("DbConnection 1", tags: new[] { "ready" })
                                       .AddCheck<DbConnectionHealthCheck<EmployeeArrivalContext>>("DbConnection 2", tags: new[] { "ready" })
+                                      .AddCheck("Service Register", () => {
+                                          Assembly assembly = GetAssemblyByName("EmployeeArrivalTrackerDomain");
+                                          Type[] types = assembly.GetTypes()
+                                                                 .Where(x => x.Name.StartsWith("I") && x.Name.EndsWith("Manager"))
+                                                                 .ToArray();
+
+                                          var serviceProvider = services.BuildServiceProvider();
+                                          foreach (var item in types)
+                                          {
+                                              var service = serviceProvider.GetService(item);
+
+                                              if (service == null)
+                                              {
+                                                  return HealthCheckResult.Unhealthy("Unhealthy service registration");
+                                              }
+                                          }
+
+                                          return HealthCheckResult.Healthy("Healthy service registration");
+                                      }, tags: new[] { "ready" })
                                       .ForwardToPrometheus();
 
+        }
+
+        static Assembly GetAssemblyByName(string name)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies().
+                   SingleOrDefault(assembly => assembly.GetName().Name == name);
         }
     }
 }
